@@ -195,6 +195,23 @@
   .tab-panel{ display:none; }
   .tab-panel.active{ display:block; }
 
+  /* ---------- Notebook cell mock ---------- */
+  .nb-cell{
+    background: var(--terminal); border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; margin: 18px 0;
+  }
+  .nb-cell-head{
+    display:flex; align-items:center; gap:10px; padding: 9px 14px;
+    background: rgba(255,255,255,.03); border-bottom: 1px solid var(--terminal-line);
+    font-family: var(--mono); font-size: 11.5px; color: var(--text-faint);
+  }
+  .nb-in{ color: var(--success); font-weight:700; }
+  .nb-cell-body{ padding: 14px 16px; font-family: var(--mono); font-size: 13.3px; color: var(--text); }
+  .nb-out{
+    padding: 12px 16px; font-family: var(--mono); font-size: 13.3px; color: var(--text-dim);
+    background: rgba(255,255,255,.02); border-top: 1px dashed var(--terminal-line);
+  }
+
   /* ---------- Troubleshooting accordion ---------- */
   details.faq{
     border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px;
@@ -237,7 +254,7 @@
     <div class="brand"><span class="dot"></span>Lab 1 · Env Setup</div>
     <nav class="pills" id="pillnav">
       <a href="#python">Python</a>
-      <a href="#pycharm">PyCharm</a>
+      <a href="#jupyter">Jupyter</a>
       <a href="#environment">Virtual env</a>
       <a href="#packages">Packages</a>
       <a href="#verify">Verify</a>
@@ -253,11 +270,11 @@
       <div>
         <div class="eyebrow">Python for AI/ML — Lab Session 1</div>
         <h1>Set up your Ubuntu machine for AI/ML development</h1>
-        <p class="lead">By the end of today's session your laptop will have Python, PyCharm, and the core scientific-computing stack installed and verified — ready for every lab that follows.</p>
+        <p class="lead">By the end of today's session your laptop will have Python, Jupyter Notebook, and the core scientific-computing stack installed and verified — ready for every lab that follows.</p>
         <div class="hero-meta">
           <div><strong>~40–50 min</strong>Time needed</div>
           <div><strong>Ubuntu 22.04 / 24.04</strong>Target OS</div>
-          <div><strong>3 tools</strong>Python · PyCharm · pip packages</div>
+          <div><strong>3 tools</strong>Python · Jupyter · pip packages</div>
         </div>
       </div>
       <div class="terminal">
@@ -282,9 +299,9 @@
         <p>Ubuntu ships with Python, but we'll make sure pip and venv are installed alongside it.</p>
       </div>
       <div class="overview-card">
-        <div class="k">02 · EDITOR</div>
-        <h4>PyCharm Community</h4>
-        <p>A free, full-featured IDE from JetBrains — the same one we'll use for every lab this semester.</p>
+        <div class="k">02 · NOTEBOOK</div>
+        <h4>Jupyter Notebook</h4>
+        <p>A browser-based, cell-by-cell interface — the one we'll use for every lab this semester.</p>
       </div>
       <div class="overview-card">
         <div class="k">03 · LIBRARIES</div>
@@ -328,48 +345,48 @@
     <div class="callout"><strong>What each package does —</strong> <code class="inline">python3-pip</code> installs Python's package manager, <code class="inline">python3-venv</code> lets you create isolated project environments (step 3), and <code class="inline">python3-dev</code> provides the headers some ML libraries need to compile.</div>
   </section>
 
-  <section id="pycharm">
+  <section id="jupyter">
     <div class="step-num">STEP 02</div>
-    <h2>Install PyCharm</h2>
-    <p class="section-lead">We'll use PyCharm Community Edition — it's free, open-source, and has everything this course needs. Pick whichever install method you're comfortable with.</p>
+    <h2>Install & launch Jupyter Notebook</h2>
+    <p class="section-lead">Jupyter Notebook gives you a browser-based, cell-by-cell interface — write a bit of code, run just that cell, see the result right underneath it. We'll install it with pip, inside the virtual environment we set up in the next step, then launch it and run a Hello World cell to confirm it works.</p>
 
-    <div class="tabs">
-      <div class="tab-buttons">
-        <button class="tab-btn active" data-tab="snap">Snap (recommended)</button>
-        <button class="tab-btn" data-tab="manual">Manual (tarball)</button>
+    <div class="callout"><strong>Order note —</strong> Jupyter installs cleanly with a single <code class="inline">pip install</code>, but on modern Ubuntu that command only works inside a virtual environment. Skim Step 3 below first if you haven't created <code class="inline">~/aiml-lab/venv</code> yet, then come back here.</div>
+
+    <h3>Install Jupyter Notebook</h3>
+    <div class="terminal" style="margin-bottom:20px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">(venv) install-jupyter.sh</div>
+        <button class="copy-btn" data-copy="pip install jupyter">Copy</button>
       </div>
-
-      <div class="tab-panel active" data-panel="snap">
-        <div class="terminal">
-          <div class="terminal-bar">
-            <div class="terminal-dots"><span></span><span></span><span></span></div>
-            <div class="terminal-title">install-pycharm.sh</div>
-            <button class="copy-btn" data-copy="sudo snap install pycharm-community --classic">Copy</button>
-          </div>
-          <div class="terminal-body">
-            <div class="line"><span class="prompt">$ </span><span class="cmd">sudo snap install pycharm-community --classic</span></div>
-          </div>
-        </div>
-        <p style="margin-top:14px;">One command, and Ubuntu keeps it updated automatically. Launch it afterward by typing <code class="inline">pycharm-community</code> in a terminal, or search "PyCharm" in the Activities menu.</p>
-      </div>
-
-      <div class="tab-panel" data-panel="manual">
-        <p>Download the Linux tarball from <a href="https://www.jetbrains.com/pycharm/download/?section=linux" target="_blank" rel="noopener">jetbrains.com/pycharm/download</a>, then:</p>
-        <div class="terminal">
-          <div class="terminal-bar">
-            <div class="terminal-dots"><span></span><span></span><span></span></div>
-            <div class="terminal-title">install-pycharm-manual.sh</div>
-            <button class="copy-btn" data-copy="tar -xzf pycharm-community-*.tar.gz -C ~/.local/share/\ncd ~/.local/share/pycharm-community-*/bin\n./pycharm.sh">Copy</button>
-          </div>
-          <div class="terminal-body">
-            <div class="line"><span class="prompt">$ </span><span class="cmd">tar -xzf pycharm-community-*.tar.gz -C ~/.local/share/</span></div>
-            <div class="line"><span class="prompt">$ </span><span class="cmd">cd ~/.local/share/pycharm-community-*/bin</span></div>
-            <div class="line"><span class="prompt">$ </span><span class="cmd">./pycharm.sh</span></div>
-          </div>
-        </div>
-        <p style="margin-top:14px;">On first launch, use <strong>Tools → Create Desktop Entry</strong> inside PyCharm so it shows up in your app menu next time.</p>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">(venv) $ </span><span class="cmd">pip install notebook</span></div>
       </div>
     </div>
+
+    <h3>Launch it</h3>
+    <div class="terminal" style="margin-bottom:20px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">(venv) launch-jupyter.sh</div>
+        <button class="copy-btn" data-copy="jupyter notebook">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">(venv) $ </span><span class="cmd">jupyter notebook</span></div>
+        <div class="line out">Serving notebooks from local directory: ~/aiml-lab</div>
+        <div class="line out">http://localhost:8888/tree?token=...</div>
+      </div>
+    </div>
+    <p>This opens a new browser tab showing the file list for <code class="inline">~/aiml-lab</code>. Leave this terminal window running in the background — closing it shuts the notebook server down. Click <strong>New → Python 3</strong> in the top-right to create your first notebook.</p>
+
+    <h3>Hello World, in a cell</h3>
+    <p>Click into the first (empty) cell, type the line below, then press <strong>Shift + Enter</strong> to run it. The output appears directly underneath the cell — no separate terminal needed.</p>
+    <div class="nb-cell">
+      <div class="nb-cell-head"><span class="nb-in">In&nbsp;[1]:</span></div>
+      <div class="nb-cell-body">print("Hello, world!")</div>
+      <div class="nb-out">Hello, world!</div>
+    </div>
+    <p>Rename the notebook by clicking <strong>"Untitled"</strong> at the top of the page — try <code class="inline">hello-world.ipynb</code> — and it'll save into <code class="inline">~/aiml-lab</code> alongside your <code class="inline">venv</code> folder.</p>
   </section>
 
   <section id="environment">
@@ -390,7 +407,7 @@
         <div class="line out">(venv) student@ubuntu-lab:~/aiml-lab$</div>
       </div>
     </div>
-    <p>That <code class="inline">(venv)</code> prefix means the environment is active — any <code class="inline">pip install</code> from here goes into this project only, not your whole system. You'll run this <code class="inline">source venv/bin/activate</code> command every time you reopen a terminal for this course.</p>
+    <p>That <code class="inline">(venv)</code> prefix means the environment is active — any <code class="inline">pip install</code> from here goes into this project only, not your whole system. You'll run this <code class="inline">source venv/bin/activate</code> command every time you reopen a terminal for this course, including before launching Jupyter.</p>
 
     <div class="callout"><strong>Why this matters —</strong> Newer Ubuntu releases (23.04+) block <code class="inline">pip install</code> outside a virtual environment with an <code class="inline">externally-managed-environment</code> error. Working inside <code class="inline">venv</code> sidesteps that entirely, so get in the habit now.</div>
   </section>
@@ -404,11 +421,11 @@
       <div class="terminal-bar">
         <div class="terminal-dots"><span></span><span></span><span></span></div>
         <div class="terminal-title">(venv) install-packages.sh</div>
-        <button class="copy-btn" data-copy="pip install --upgrade pip\npip install numpy pandas matplotlib scikit-learn jupyter">Copy</button>
+        <button class="copy-btn" data-copy="pip install --upgrade pip\npip install numpy pandas matplotlib scikit-learn notebook">Copy</button>
       </div>
       <div class="terminal-body">
         <div class="line"><span class="prompt">(venv) $ </span><span class="cmd">pip install --upgrade pip</span></div>
-        <div class="line"><span class="prompt">(venv) $ </span><span class="cmd">pip install numpy pandas matplotlib scikit-learn jupyter</span></div>
+        <div class="line"><span class="prompt">(venv) $ </span><span class="cmd">pip install numpy pandas matplotlib scikit-learn notebook</span></div>
       </div>
     </div>
 
@@ -417,7 +434,7 @@
       <li><strong>pandas</strong> — tabular data and datasets</li>
       <li><strong>matplotlib</strong> — plotting and visualization</li>
       <li><strong>scikit-learn</strong> — classical ML models</li>
-      <li><strong>jupyter</strong> — notebook interface, for later labs</li>
+      <li><strong>notebook</strong> — Jupyter Notebook, already installed in Step 2, listed here so <code class="inline">requirements.txt</code> captures everything in one place</li>
     </ul>
 
     <h3 style="margin-top:26px;">Save the list for next time</h3>
@@ -437,7 +454,7 @@
   <section id="verify">
     <div class="step-num">STEP 05</div>
     <h2>Verify everything works</h2>
-    <p class="section-lead">Two quick checks — one from the terminal, one from PyCharm.</p>
+    <p class="section-lead">Two quick checks — one from the terminal, one from Jupyter Notebook itself.</p>
 
     <h3>From the terminal</h3>
     <div class="terminal" style="margin-bottom:24px;">
@@ -452,13 +469,19 @@
       </div>
     </div>
 
-    <h3>From PyCharm</h3>
+    <h3>From Jupyter Notebook</h3>
     <ul class="checklist">
-      <li>Open PyCharm → <strong>File → Open</strong> → select the <code class="inline">~/aiml-lab</code> folder</li>
-      <li>Go to <strong>Settings → Project → Python Interpreter → Add Interpreter → Existing</strong></li>
-      <li>Point it at <code class="inline">~/aiml-lab/venv/bin/python</code></li>
-      <li>Create a new file <code class="inline">test.py</code>, type <code class="inline">import numpy</code>, and confirm there's no red underline</li>
+      <li>With <code class="inline">venv</code> active, run <code class="inline">jupyter notebook</code> from <code class="inline">~/aiml-lab</code></li>
+      <li>Open your <code class="inline">hello-world.ipynb</code> from Step 2 (or create a new notebook)</li>
+      <li>In a new cell, type <code class="inline">import numpy, pandas, matplotlib, sklearn</code> and run it with Shift + Enter</li>
+      <li>No red error text under the cell means every package imported correctly</li>
     </ul>
+    <div class="nb-cell">
+      <div class="nb-cell-head"><span class="nb-in">In&nbsp;[2]:</span></div>
+      <div class="nb-cell-body">import numpy, pandas, matplotlib, sklearn
+print("All good, NumPy", numpy.__version__)</div>
+      <div class="nb-out">All good, NumPy 2.0.1</div>
+    </div>
   </section>
 
   <section id="troubleshooting">
@@ -482,13 +505,18 @@
     </details>
 
     <details class="faq">
-      <summary>PyCharm window is blank or won't open</summary>
-      <div class="faq-body">This is usually a Wayland display issue. Log out, click the gear icon on the login screen, and choose <strong>Ubuntu on Xorg</strong> before logging back in.</div>
+      <summary>"jupyter: command not found"</summary>
+      <div class="faq-body">Almost always means <code class="inline">venv</code> isn't active. Run <code class="inline">source venv/bin/activate</code> first, then try <code class="inline">jupyter notebook</code> again. If it still fails, re-run <code class="inline">pip install notebook</code> from inside the active environment.</div>
     </details>
 
     <details class="faq">
-      <summary>"snap: command not found"</summary>
-      <div class="faq-body">Rare on modern Ubuntu, but if it happens: <code class="inline">sudo apt install snapd</code>, then retry the PyCharm install command.</div>
+      <summary>Browser doesn't open automatically / "no browser found"</summary>
+      <div class="faq-body">Copy the <code class="inline">http://localhost:8888/tree?token=...</code> URL printed in the terminal and paste it into any browser manually.</div>
+    </details>
+
+    <details class="faq">
+      <summary>A cell shows <code class="inline">ModuleNotFoundError</code> for a package you just installed</summary>
+      <div class="faq-body">The notebook's kernel is usually a different Python than the one you installed into. Check <strong>Kernel → Change kernel</strong> and make sure it points at <code class="inline">~/aiml-lab/venv</code>, or fully quit and relaunch <code class="inline">jupyter notebook</code> after activating <code class="inline">venv</code>.</div>
     </details>
   </section>
 
@@ -569,20 +597,9 @@
     });
   });
 
-  // Tabs
-  document.querySelectorAll('.tab-btn').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const group = btn.closest('.tabs');
-      group.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-      group.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-      btn.classList.add('active');
-      group.querySelector(`.tab-panel[data-panel="${btn.dataset.tab}"]`).classList.add('active');
-    });
-  });
-
   // Scroll-spy nav
   (function(){
-    const sections = ['python','pycharm','environment','packages','verify','troubleshooting']
+    const sections = ['python','jupyter','environment','packages','verify','troubleshooting']
       .map(id=>document.getElementById(id)).filter(Boolean);
     const links = document.querySelectorAll('#pillnav a');
     const byId = {};
@@ -604,3 +621,4 @@
 
 </body>
 </html>
+
