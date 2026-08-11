@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 1 · Environment Setup — Python for AI/ML</title>
+<meta name="description" content="Lab 1 guide: installing Python, PyCharm, and core AI/ML packages on Ubuntu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #221A1D;
+    --bg-soft: #2A2124;
+    --panel: #2E2428;
+    --terminal: #17110F;
+    --terminal-line: rgba(255,255,255,.06);
+    --text: #F3EDE6;
+    --text-dim: #BCAFA9;
+    --text-faint: #8A7C77;
+    --accent: #E95420;
+    --accent-bright: #FF7A47;
+    --accent-2: #9B4F92;
+    --success: #52B788;
+    --border: rgba(255,255,255,.09);
+    --radius: 12px;
+    --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: var(--accent-bright); }
+  ::selection{ background: var(--accent); color: #fff; }
+
+  img,svg{display:block;max-width:100%;}
+
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Top nav ---------- */
+  header.topbar{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(34,26,29,.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar-inner{
+    max-width: 880px; margin:0 auto; padding: 14px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap: 16px;
+  }
+  .brand{
+    font-family: var(--display); font-weight:700; font-size: 15px;
+    letter-spacing: .01em; white-space:nowrap;
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand .dot{ width:8px; height:8px; border-radius:50%; background: var(--accent); }
+  nav.pills{
+    display:flex; gap: 6px; overflow-x:auto; scrollbar-width:none;
+  }
+  nav.pills::-webkit-scrollbar{ display:none; }
+  nav.pills a{
+    font-family: var(--mono); font-size: 12.5px; color: var(--text-dim);
+    text-decoration:none; padding: 7px 12px; border-radius: 999px;
+    white-space:nowrap; border: 1px solid transparent;
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
+  }
+  nav.pills a:hover{ color: var(--text); }
+  nav.pills a.active{
+    color: var(--text); border-color: var(--border); background: var(--panel);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding: 64px 0 40px; }
+  .hero-inner{
+    display:grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items:center;
+  }
+  .eyebrow{
+    font-family: var(--mono); font-size: 12.5px; color: var(--accent-bright);
+    letter-spacing: .08em; text-transform: uppercase; display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{ content:""; width:18px; height:1px; background: var(--accent-bright); display:inline-block; }
+  h1{
+    font-family: var(--display); font-weight:700; font-size: clamp(30px, 4.2vw, 44px);
+    line-height:1.08; margin: 14px 0 16px; letter-spacing: -0.01em;
+  }
+  .hero p.lead{ color: var(--text-dim); font-size: 16px; max-width: 46ch; }
+  .hero-meta{ display:flex; gap:22px; margin-top:26px; flex-wrap:wrap; }
+  .hero-meta div{ font-family: var(--mono); font-size:12.5px; color: var(--text-faint); }
+  .hero-meta strong{ display:block; color: var(--text); font-size: 14px; font-family: var(--body); font-weight:600; }
+
+  /* ---------- Terminal window ---------- */
+  .terminal{
+    background: var(--terminal);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,.7);
+    overflow: hidden;
+  }
+  .terminal-bar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 10px 14px; background: rgba(255,255,255,.03);
+    border-bottom: 1px solid var(--terminal-line);
+  }
+  .terminal-dots{ display:flex; gap:6px; }
+  .terminal-dots span{ width:10px; height:10px; border-radius:50%; }
+  .terminal-dots span:nth-child(1){ background:#E95420; }
+  .terminal-dots span:nth-child(2){ background:#E4B454; }
+  .terminal-dots span:nth-child(3){ background:#52B788; }
+  .terminal-title{ font-family: var(--mono); font-size:11.5px; color: var(--text-faint); }
+  .copy-btn{
+    font-family: var(--mono); font-size: 11px; color: var(--text-dim);
+    background: rgba(255,255,255,.05); border: 1px solid var(--border);
+    padding: 4px 9px; border-radius: 6px; cursor:pointer;
+    transition: all .15s ease;
+  }
+  .copy-btn:hover{ color: var(--text); border-color: var(--accent-bright); }
+  .copy-btn.copied{ color: var(--success); border-color: var(--success); }
+  .terminal-body{
+    padding: 18px 20px 22px; font-family: var(--mono); font-size: 13.3px;
+    line-height: 1.85; overflow-x:auto; min-height: 20px;
+  }
+  .terminal-body .line{ white-space: pre; }
+  .terminal-body .prompt{ color: var(--accent-2); }
+  .terminal-body .cmd{ color: var(--text); }
+  .terminal-body .out{ color: var(--text-dim); }
+  .terminal-body .cursor{
+    display:inline-block; width:7px; height:14px; background: var(--accent-bright);
+    vertical-align: middle; margin-left:2px; animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  /* ---------- Sections ---------- */
+  section{ padding: 54px 0; border-top: 1px solid var(--border); }
+  section#overview{ border-top:none; padding-top: 8px; }
+  .step-num{
+    font-family: var(--mono); font-size: 13px; color: var(--accent-bright);
+    letter-spacing: .06em;
+  }
+  h2{
+    font-family: var(--display); font-weight:600; font-size: clamp(22px, 3vw, 28px);
+    margin: 8px 0 12px; letter-spacing:-0.01em;
+  }
+  .section-lead{ color: var(--text-dim); max-width: 62ch; margin-bottom: 26px; }
+  h3{ font-family: var(--display); font-weight:600; font-size: 16px; margin: 0 0 10px; }
+  p{ margin: 0 0 14px; color: var(--text-dim); max-width: 66ch; }
+  p strong{ color: var(--text); font-weight:600; }
+  code.inline{
+    font-family: var(--mono); font-size: 12.8px; background: var(--panel);
+    border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; color: var(--accent-bright);
+  }
+
+  .callout{
+    background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    border-radius: 8px; padding: 14px 16px; margin: 18px 0; font-size: 14px; color: var(--text-dim);
+  }
+  .callout strong{ color: var(--text); }
+
+  .checklist{ list-style:none; display:grid; gap:10px; margin: 6px 0 0; }
+  .checklist li{
+    display:flex; gap:10px; align-items:flex-start; font-size: 14.5px; color: var(--text-dim);
+  }
+  .checklist li::before{
+    content:"✓"; font-family: var(--mono); color: var(--success); font-weight:700;
+    background: rgba(82,183,136,.12); width:20px; height:20px; border-radius:6px;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:12px; margin-top:2px;
+  }
+
+  .overview-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 28px; }
+  .overview-card{
+    background: var(--panel); border:1px solid var(--border); border-radius: var(--radius);
+    padding: 18px; transition: border-color .15s ease, transform .15s ease;
+  }
+  .overview-card:hover{ border-color: var(--accent-bright); transform: translateY(-2px); }
+  .overview-card .k{ font-family: var(--mono); font-size:11px; color: var(--accent-bright); letter-spacing:.06em; }
+  .overview-card h4{ font-family: var(--display); font-size:15px; margin: 8px 0 6px; }
+  .overview-card p{ font-size: 13px; margin:0; color: var(--text-faint); }
+
+  /* ---------- Tabs ---------- */
+  .tabs{ margin-top: 4px; }
+  .tab-buttons{ display:flex; gap:4px; margin-bottom: 14px; flex-wrap:wrap; }
+  .tab-btn{
+    font-family: var(--mono); font-size: 12.5px; color: var(--text-dim);
+    background: transparent; border: 1px solid var(--border); padding: 8px 14px;
+    border-radius: 8px; cursor:pointer; transition: all .15s ease;
+  }
+  .tab-btn.active{ color: var(--text); border-color: var(--accent); background: rgba(233,84,32,.1); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  /* ---------- Troubleshooting accordion ---------- */
+  details.faq{
+    border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px;
+    background: var(--panel); overflow:hidden;
+  }
+  details.faq summary{
+    padding: 14px 16px; cursor:pointer; font-weight:600; font-size:14.5px;
+    list-style:none; display:flex; justify-content:space-between; align-items:center; gap:10px;
+  }
+  details.faq summary::-webkit-details-marker{ display:none; }
+  details.faq summary::after{
+    content:"+"; font-family: var(--mono); color: var(--accent-bright); font-size:18px; flex-shrink:0;
+  }
+  details.faq[open] summary::after{ content:"–"; }
+  details.faq .faq-body{ padding: 0 16px 16px; color: var(--text-dim); font-size: 14px; }
+  details.faq .faq-body code.inline{ margin: 2px 0; }
+
+  /* ---------- Footer ---------- */
+  footer{ padding: 50px 0 70px; border-top: 1px solid var(--border); }
+  footer p{ font-size: 13px; color: var(--text-faint); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 760px){
+    .hero-inner{ grid-template-columns: 1fr; }
+    .overview-grid{ grid-template-columns: 1fr; }
+    .hero{ padding-top: 40px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .cursor{ animation:none; opacity:1; }
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="dot"></span>Lab 1 · Env Setup</div>
+    <nav class="pills" id="pillnav">
+      <a href="#python">Python</a>
+      <a href="#pycharm">PyCharm</a>
+      <a href="#environment">Virtual env</a>
+      <a href="#packages">Packages</a>
+      <a href="#verify">Verify</a>
+      <a href="#troubleshooting">Troubleshoot</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Python for AI/ML — Lab Session 1</div>
+        <h1>Set up your Ubuntu machine for AI/ML development</h1>
+        <p class="lead">By the end of today's session your laptop will have Python, PyCharm, and the core scientific-computing stack installed and verified — ready for every lab that follows.</p>
+        <div class="hero-meta">
+          <div><strong>~40–50 min</strong>Time needed</div>
+          <div><strong>Ubuntu 22.04 / 24.04</strong>Target OS</div>
+          <div><strong>3 tools</strong>Python · PyCharm · pip packages</div>
+        </div>
+      </div>
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dots"><span></span><span></span><span></span></div>
+          <div class="terminal-title">student@ubuntu-lab: ~</div>
+          <div style="width:40px"></div>
+        </div>
+        <div class="terminal-body" id="hero-terminal"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="overview">
+    <div class="step-num">TODAY'S ROADMAP</div>
+    <h2>Three things, in order</h2>
+    <p class="section-lead">Each step depends on the one before it, so work through this page top to bottom rather than jumping around on your first pass.</p>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="k">01 · RUNTIME</div>
+        <h4>Python 3</h4>
+        <p>Ubuntu ships with Python, but we'll make sure pip and venv are installed alongside it.</p>
+      </div>
+      <div class="overview-card">
+        <div class="k">02 · EDITOR</div>
+        <h4>PyCharm Community</h4>
+        <p>A free, full-featured IDE from JetBrains — the same one we'll use for every lab this semester.</p>
+      </div>
+      <div class="overview-card">
+        <div class="k">03 · LIBRARIES</div>
+        <h4>NumPy, pandas, scikit-learn…</h4>
+        <p>Installed inside a project-specific virtual environment, not system-wide.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="python">
+    <div class="step-num">STEP 01</div>
+    <h2>Install Python 3</h2>
+    <p class="section-lead">Most Ubuntu installations already include Python 3 — the first move is always to check before installing anything.</p>
+
+    <h3>Check what's already there</h3>
+    <div class="terminal" style="margin-bottom:24px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">check-python.sh</div>
+        <button class="copy-btn" data-copy="python3 --version">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 --version</span></div>
+        <div class="line out">Python 3.12.3</div>
+      </div>
+    </div>
+    <p>If that printed a version number, Python itself is already there. If it printed <code class="inline">command not found</code>, the install step below will fix that too.</p>
+
+    <h3>Update package lists and install the essentials</h3>
+    <div class="terminal" style="margin-bottom:20px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">install-python.sh</div>
+        <button class="copy-btn" data-copy="sudo apt update\nsudo apt install -y python3 python3-pip python3-venv python3-dev">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">sudo apt update</span></div>
+        <div class="line"><span class="prompt">$ </span><span class="cmd">sudo apt install -y python3 python3-pip python3-venv python3-dev</span></div>
+      </div>
+    </div>
+    <div class="callout"><strong>What each package does —</strong> <code class="inline">python3-pip</code> installs Python's package manager, <code class="inline">python3-venv</code> lets you create isolated project environments (step 3), and <code class="inline">python3-dev</code> provides the headers some ML libraries need to compile.</div>
+  </section>
+
+  <section id="pycharm">
+    <div class="step-num">STEP 02</div>
+    <h2>Install PyCharm</h2>
+    <p class="section-lead">We'll use PyCharm Community Edition — it's free, open-source, and has everything this course needs. Pick whichever install method you're comfortable with.</p>
+
+    <div class="tabs">
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="snap">Snap (recommended)</button>
+        <button class="tab-btn" data-tab="manual">Manual (tarball)</button>
+      </div>
+
+      <div class="tab-panel active" data-panel="snap">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <div class="terminal-dots"><span></span><span></span><span></span></div>
+            <div class="terminal-title">install-pycharm.sh</div>
+            <button class="copy-btn" data-copy="sudo snap install pycharm-community --classic">Copy</button>
+          </div>
+          <div class="terminal-body">
+            <div class="line"><span class="prompt">$ </span><span class="cmd">sudo snap install pycharm-community --classic</span></div>
+          </div>
+        </div>
+        <p style="margin-top:14px;">One command, and Ubuntu keeps it updated automatically. Launch it afterward by typing <code class="inline">pycharm-community</code> in a terminal, or search "PyCharm" in the Activities menu.</p>
+      </div>
+
+      <div class="tab-panel" data-panel="manual">
+        <p>Download the Linux tarball from <a href="https://www.jetbrains.com/pycharm/download/?section=linux" target="_blank" rel="noopener">jetbrains.com/pycharm/download</a>, then:</p>
+        <div class="terminal">
+          <div class="terminal-bar">
+            <div class="terminal-dots"><span></span><span></span><span></span></div>
+            <div class="terminal-title">install-pycharm-manual.sh</div>
+            <button class="copy-btn" data-copy="tar -xzf pycharm-community-*.tar.gz -C ~/.local/share/\ncd ~/.local/share/pycharm-community-*/bin\n./pycharm.sh">Copy</button>
+          </div>
+          <div class="terminal-body">
+            <div class="line"><span class="prompt">$ </span><span class="cmd">tar -xzf pycharm-community-*.tar.gz -C ~/.local/share/</span></div>
+            <div class="line"><span class="prompt">$ </span><span class="cmd">cd ~/.local/share/pycharm-community-*/bin</span></div>
+            <div class="line"><span class="prompt">$ </span><span class="cmd">./pycharm.sh</span></div>
+          </div>
+        </div>
+        <p style="margin-top:14px;">On first launch, use <strong>Tools → Create Desktop Entry</strong> inside PyCharm so it shows up in your app menu next time.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="environment">
+    <div class="step-num">STEP 03</div>
+    <h2>Create a project and a virtual environment</h2>
+    <p class="section-lead">A virtual environment keeps this course's packages separate from your system Python — and on modern Ubuntu, it's the difference between pip working and pip refusing to run.</p>
+
+    <div class="terminal" style="margin-bottom:20px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">create-venv.sh</div>
+        <button class="copy-btn" data-copy="mkdir -p ~/aiml-lab &amp;&amp; cd ~/aiml-lab\npython3 -m venv venv\nsource venv/bin/activate">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">mkdir -p ~/aiml-lab &amp;&amp; cd ~/aiml-lab</span></div>
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 -m venv venv</span></div>
+        <div class="line"><span class="prompt">$ </span><span class="cmd">source venv/bin/activate</span></div>
+        <div class="line out">(venv) student@ubuntu-lab:~/aiml-lab$</div>
+      </div>
+    </div>
+    <p>That <code class="inline">(venv)</code> prefix means the environment is active — any <code class="inline">pip install</code> from here goes into this project only, not your whole system. You'll run this <code class="inline">source venv/bin/activate</code> command every time you reopen a terminal for this course.</p>
+
+    <div class="callout"><strong>Why this matters —</strong> Newer Ubuntu releases (23.04+) block <code class="inline">pip install</code> outside a virtual environment with an <code class="inline">externally-managed-environment</code> error. Working inside <code class="inline">venv</code> sidesteps that entirely, so get in the habit now.</div>
+  </section>
+
+  <section id="packages">
+    <div class="step-num">STEP 04</div>
+    <h2>Install the core AI/ML packages</h2>
+    <p class="section-lead">With the virtual environment active, install the libraries we'll use across the semester.</p>
+
+    <div class="terminal" style="margin-bottom:20px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">(venv) install-packages.sh</div>
+        <button class="copy-btn" data-copy="pip install --upgrade pip\npip install numpy pandas matplotlib scikit-learn jupyter">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">(venv) $ </span><span class="cmd">pip install --upgrade pip</span></div>
+        <div class="line"><span class="prompt">(venv) $ </span><span class="cmd">pip install numpy pandas matplotlib scikit-learn jupyter</span></div>
+      </div>
+    </div>
+
+    <ul class="checklist">
+      <li><strong>numpy</strong> — arrays and numerical computing</li>
+      <li><strong>pandas</strong> — tabular data and datasets</li>
+      <li><strong>matplotlib</strong> — plotting and visualization</li>
+      <li><strong>scikit-learn</strong> — classical ML models</li>
+      <li><strong>jupyter</strong> — notebook interface, for later labs</li>
+    </ul>
+
+    <h3 style="margin-top:26px;">Save the list for next time</h3>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">(venv) freeze.sh</div>
+        <button class="copy-btn" data-copy="pip freeze > requirements.txt">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">(venv) $ </span><span class="cmd">pip freeze &gt; requirements.txt</span></div>
+      </div>
+    </div>
+    <p style="margin-top:14px;">Anyone (including future-you) can then recreate this exact environment with <code class="inline">pip install -r requirements.txt</code>.</p>
+  </section>
+
+  <section id="verify">
+    <div class="step-num">STEP 05</div>
+    <h2>Verify everything works</h2>
+    <p class="section-lead">Two quick checks — one from the terminal, one from PyCharm.</p>
+
+    <h3>From the terminal</h3>
+    <div class="terminal" style="margin-bottom:24px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">(venv) verify.py</div>
+        <button class="copy-btn" data-copy="python3 -c &quot;import numpy, pandas, matplotlib, sklearn; print('All good, NumPy', numpy.__version__)&quot;">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">(venv) $ </span><span class="cmd">python3 -c "import numpy, pandas, matplotlib, sklearn; print('All good, NumPy', numpy.__version__)"</span></div>
+        <div class="line out">All good, NumPy 2.0.1</div>
+      </div>
+    </div>
+
+    <h3>From PyCharm</h3>
+    <ul class="checklist">
+      <li>Open PyCharm → <strong>File → Open</strong> → select the <code class="inline">~/aiml-lab</code> folder</li>
+      <li>Go to <strong>Settings → Project → Python Interpreter → Add Interpreter → Existing</strong></li>
+      <li>Point it at <code class="inline">~/aiml-lab/venv/bin/python</code></li>
+      <li>Create a new file <code class="inline">test.py</code>, type <code class="inline">import numpy</code>, and confirm there's no red underline</li>
+    </ul>
+  </section>
+
+  <section id="troubleshooting">
+    <div class="step-num">JUST IN CASE</div>
+    <h2>Troubleshooting</h2>
+    <p class="section-lead">The most common snags from past sessions, and the fix for each.</p>
+
+    <details class="faq" open>
+      <summary>pip says "externally-managed-environment"</summary>
+      <div class="faq-body">You tried to <code class="inline">pip install</code> outside a virtual environment. Run <code class="inline">source venv/bin/activate</code> first (Step 3), then install again.</div>
+    </details>
+
+    <details class="faq">
+      <summary>"command not found: pip3" right after installing python3-pip</summary>
+      <div class="faq-body">Your shell cached the old command list. Close and reopen the terminal, or run <code class="inline">hash -r</code>.</div>
+    </details>
+
+    <details class="faq">
+      <summary>apt install asks for a password and rejects mine</summary>
+      <div class="faq-body">You need <code class="inline">sudo</code> (administrator) rights on the machine. If it's a shared lab computer, check with whoever manages it — your account may need to be added to the sudoers group.</div>
+    </details>
+
+    <details class="faq">
+      <summary>PyCharm window is blank or won't open</summary>
+      <div class="faq-body">This is usually a Wayland display issue. Log out, click the gear icon on the login screen, and choose <strong>Ubuntu on Xorg</strong> before logging back in.</div>
+    </details>
+
+    <details class="faq">
+      <summary>"snap: command not found"</summary>
+      <div class="faq-body">Rare on modern Ubuntu, but if it happens: <code class="inline">sudo apt install snapd</code>, then retry the PyCharm install command.</div>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Python for AI/ML · Lab 1 of the semester — bring a laptop with this environment ready for Lab 2.</p>
+  </div>
+</footer>
+
+<script>
+  // Hero typing animation
+  (function(){
+    const el = document.getElementById('hero-terminal');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const lines = [
+      {type:'cmd', text:'whoami'},
+      {type:'out', text:'student'},
+      {type:'cmd', text:'python3 --version'},
+      {type:'out', text:'Python 3.12.3'},
+      {type:'cmd', text:'echo "ready for lab 1"'},
+      {type:'out', text:'ready for lab 1'}
+    ];
+
+    function renderStatic(){
+      el.innerHTML = lines.map(l=>{
+        if(l.type==='cmd') return `<div class="line"><span class="prompt">$ </span><span class="cmd">${l.text}</span></div>`;
+        return `<div class="line out">${l.text}</div>`;
+      }).join('') + '<span class="cursor"></span>';
+    }
+
+    if(reduced){ renderStatic(); return; }
+
+    let li = 0;
+    function nextLine(){
+      if(li >= lines.length){
+        el.insertAdjacentHTML('beforeend','<span class="cursor"></span>');
+        return;
+      }
+      const l = lines[li];
+      const div = document.createElement('div');
+      div.className = 'line';
+      if(l.type==='cmd'){
+        div.innerHTML = '<span class="prompt">$ </span><span class="cmd"></span>';
+        el.appendChild(div);
+        const target = div.querySelector('.cmd');
+        typeChars(target, l.text, ()=>{ li++; setTimeout(nextLine, 220); });
+      } else {
+        div.classList.add('out');
+        el.appendChild(div);
+        div.textContent = l.text;
+        li++;
+        setTimeout(nextLine, 260);
+      }
+    }
+    function typeChars(target, text, done){
+      let i = 0;
+      const t = setInterval(()=>{
+        target.textContent += text[i];
+        i++;
+        if(i >= text.length){ clearInterval(t); done(); }
+      }, 26);
+    }
+    nextLine();
+  })();
+
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const raw = btn.getAttribute('data-copy') || '';
+      const text = raw.replace(/\\n/g, '\n');
+      try{ await navigator.clipboard.writeText(text); }catch(e){}
+      const original = btn.textContent;
+      btn.textContent = 'Copied';
+      btn.classList.add('copied');
+      setTimeout(()=>{ btn.textContent = original; btn.classList.remove('copied'); }, 1400);
+    });
+  });
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const group = btn.closest('.tabs');
+      group.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      group.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      group.querySelector(`.tab-panel[data-panel="${btn.dataset.tab}"]`).classList.add('active');
+    });
+  });
+
+  // Scroll-spy nav
+  (function(){
+    const sections = ['python','pycharm','environment','packages','verify','troubleshooting']
+      .map(id=>document.getElementById(id)).filter(Boolean);
+    const links = document.querySelectorAll('#pillnav a');
+    const byId = {};
+    links.forEach(l=> byId[l.getAttribute('href').slice(1)] = l);
+
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          links.forEach(l=>l.classList.remove('active'));
+          const link = byId[entry.target.id];
+          if(link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+    sections.forEach(s=>obs.observe(s));
+  })();
+</script>
+
+</body>
+</html>
