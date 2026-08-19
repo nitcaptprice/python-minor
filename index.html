@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lab 1 · Environment Setup — Python for AI/ML</title>
-<meta name="description" content="Lab 1 guide: installing Python, PyCharm, and core AI/ML packages on Ubuntu.">
+<title>Python for AI/ML — Lab Portal</title>
+<meta name="description" content="Lab portal: Lab 0 environment setup and Lab 1 Python basics with solutions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -48,13 +48,13 @@
   /* ---------- Top nav ---------- */
   header.topbar{
     position: sticky; top:0; z-index: 50;
-    background: rgba(34,26,29,.86);
+    background: rgba(34,26,29,.92);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
   }
   .topbar-inner{
     max-width: 880px; margin:0 auto; padding: 14px 24px;
-    display:flex; align-items:center; justify-content:space-between; gap: 16px;
+    display:flex; align-items:center; justify-content:space-between; gap: 16px; flex-wrap:wrap;
   }
   .brand{
     font-family: var(--display); font-weight:700; font-size: 15px;
@@ -62,6 +62,22 @@
     display:flex; align-items:center; gap:8px;
   }
   .brand .dot{ width:8px; height:8px; border-radius:50%; background: var(--accent); }
+
+  .lab-switcher{ position: relative; display:flex; align-items:center; gap:8px; }
+  .lab-switcher label{ font-family: var(--mono); font-size: 11px; color: var(--text-faint); letter-spacing:.06em; text-transform:uppercase; }
+  .lab-switcher select{
+    appearance: none; -webkit-appearance:none;
+    font-family: var(--mono); font-size: 13px; color: var(--text);
+    background: var(--panel) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%23FF7A47'/></svg>") no-repeat right 12px center;
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 34px 8px 12px; cursor:pointer;
+    transition: border-color .15s ease;
+  }
+  .lab-switcher select:hover, .lab-switcher select:focus{ border-color: var(--accent-bright); outline:none; }
+
+  .topbar-subnav{
+    max-width: 880px; margin: 0 auto; padding: 0 24px 12px;
+  }
   nav.pills{
     display:flex; gap: 6px; overflow-x:auto; scrollbar-width:none;
   }
@@ -69,7 +85,7 @@
   nav.pills a{
     font-family: var(--mono); font-size: 12.5px; color: var(--text-dim);
     text-decoration:none; padding: 7px 12px; border-radius: 999px;
-    white-space:nowrap; border: 1px solid transparent;
+    white-space:nowrap; border: 1px solid transparent; flex-shrink:0;
     transition: color .15s ease, border-color .15s ease, background .15s ease;
   }
   nav.pills a:hover{ color: var(--text); }
@@ -77,8 +93,12 @@
     color: var(--text); border-color: var(--border); background: var(--panel);
   }
 
+  /* ---------- Lab views ---------- */
+  .lab-view{ display:none; }
+  .lab-view.active{ display:block; }
+
   /* ---------- Hero ---------- */
-  .hero{ padding: 64px 0 40px; }
+  .hero{ padding: 44px 0 40px; }
   .hero-inner{
     display:grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items:center;
   }
@@ -131,6 +151,8 @@
   .terminal-body .prompt{ color: var(--accent-2); }
   .terminal-body .cmd{ color: var(--text); }
   .terminal-body .out{ color: var(--text-dim); }
+  .terminal-body .code{ color: var(--text); }
+  .terminal-body .cmt{ color: var(--text-faint); }
   .terminal-body .cursor{
     display:inline-block; width:7px; height:14px; background: var(--accent-bright);
     vertical-align: middle; margin-left:2px; animation: blink 1s steps(1) infinite;
@@ -139,7 +161,7 @@
 
   /* ---------- Sections ---------- */
   section{ padding: 54px 0; border-top: 1px solid var(--border); }
-  section#overview{ border-top:none; padding-top: 8px; }
+  .lab-view > section:first-of-type{ border-top:none; padding-top: 8px; }
   .step-num{
     font-family: var(--mono); font-size: 13px; color: var(--accent-bright);
     letter-spacing: .06em;
@@ -174,13 +196,14 @@
   }
 
   .overview-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 28px; }
+  .overview-grid.q-grid{ grid-template-columns: repeat(4,1fr); }
   .overview-card{
     background: var(--panel); border:1px solid var(--border); border-radius: var(--radius);
-    padding: 18px; transition: border-color .15s ease, transform .15s ease;
+    padding: 18px; transition: border-color .15s ease, transform .15s ease; text-decoration:none; display:block;
   }
   .overview-card:hover{ border-color: var(--accent-bright); transform: translateY(-2px); }
   .overview-card .k{ font-family: var(--mono); font-size:11px; color: var(--accent-bright); letter-spacing:.06em; }
-  .overview-card h4{ font-family: var(--display); font-size:15px; margin: 8px 0 6px; }
+  .overview-card h4{ font-family: var(--display); font-size:15px; margin: 8px 0 6px; color: var(--text); }
   .overview-card p{ font-size: 13px; margin:0; color: var(--text-faint); }
 
   /* ---------- Tabs ---------- */
@@ -206,11 +229,29 @@
     font-family: var(--mono); font-size: 11.5px; color: var(--text-faint);
   }
   .nb-in{ color: var(--success); font-weight:700; }
-  .nb-cell-body{ padding: 14px 16px; font-family: var(--mono); font-size: 13.3px; color: var(--text); }
+  .nb-cell-body{ padding: 14px 16px; font-family: var(--mono); font-size: 13.3px; color: var(--text); white-space:pre-wrap; }
   .nb-out{
     padding: 12px 16px; font-family: var(--mono); font-size: 13.3px; color: var(--text-dim);
-    background: rgba(255,255,255,.02); border-top: 1px dashed var(--terminal-line);
+    background: rgba(255,255,255,.02); border-top: 1px dashed var(--terminal-line); white-space:pre-wrap;
   }
+
+  /* ---------- Question blocks (Lab 1) ---------- */
+  .question-block{ margin-bottom: 56px; }
+  .question-block:last-child{ margin-bottom: 0; }
+  .q-tag{
+    display:inline-flex; align-items:center; justify-content:center;
+    font-family: var(--mono); font-size: 12px; font-weight:700; color: var(--bg);
+    background: var(--accent-bright); border-radius: 6px; padding: 3px 9px; margin-right:10px;
+  }
+  .q-head{ display:flex; align-items:center; gap:2px; margin-bottom: 6px; flex-wrap:wrap; }
+  .q-prompt{
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 16px; margin: 10px 0 16px; font-size: 14.5px; color: var(--text-dim);
+  }
+  .q-prompt strong{ color: var(--text); }
+  .q-prompt ul{ margin: 8px 0 0 20px; }
+  .q-prompt li{ margin-bottom: 4px; }
+  .code-title{ font-family: var(--mono); font-size: 12.5px; color: var(--text-faint); margin: 18px 0 8px; letter-spacing:.04em; text-transform:uppercase; }
 
   /* ---------- Troubleshooting accordion ---------- */
   details.faq{
@@ -237,7 +278,9 @@
   @media (max-width: 760px){
     .hero-inner{ grid-template-columns: 1fr; }
     .overview-grid{ grid-template-columns: 1fr; }
-    .hero{ padding-top: 40px; }
+    .overview-grid.q-grid{ grid-template-columns: repeat(2,1fr); }
+    .hero{ padding-top: 32px; }
+    .topbar-inner{ gap: 10px; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -251,8 +294,17 @@
 
 <header class="topbar">
   <div class="topbar-inner">
-    <div class="brand"><span class="dot"></span>Lab 1 · Env Setup</div>
-    <nav class="pills" id="pillnav">
+    <div class="brand"><span class="dot"></span>Python for AI/ML · Labs</div>
+    <div class="lab-switcher">
+      <label for="lab-select">Jump to</label>
+      <select id="lab-select">
+        <option value="lab-0">Lab 0 · Environment Setup</option>
+        <option value="lab-1">Lab 1 · Python Basics</option>
+      </select>
+    </div>
+  </div>
+  <div class="topbar-subnav">
+    <nav class="pills" id="pillnav-lab-0">
       <a href="#python">Python</a>
       <a href="#jupyter">Jupyter</a>
       <a href="#environment">Virtual env</a>
@@ -260,17 +312,31 @@
       <a href="#verify">Verify</a>
       <a href="#troubleshooting">Troubleshoot</a>
     </nav>
+    <nav class="pills" id="pillnav-lab-1" style="display:none;">
+      <a href="#q1">Q1</a>
+      <a href="#q2">Q2</a>
+      <a href="#q3">Q3</a>
+      <a href="#q4">Q4</a>
+      <a href="#q5">Q5</a>
+      <a href="#q6">Q6</a>
+      <a href="#q7">Q7</a>
+    </nav>
   </div>
 </header>
 
 <main class="wrap">
 
+<!-- ============================================================ -->
+<!-- LAB 0 — ENVIRONMENT SETUP                                    -->
+<!-- ============================================================ -->
+<div class="lab-view active" id="lab-0">
+
   <section class="hero">
     <div class="hero-inner">
       <div>
-        <div class="eyebrow">Python for AI/ML — Lab Session 1</div>
+        <div class="eyebrow">Python for AI/ML — Lab Session 0</div>
         <h1>Set up your Ubuntu machine for AI/ML development</h1>
-        <p class="lead">By the end of today's session your laptop will have Python, Jupyter Notebook, and the core scientific-computing stack installed and verified — ready for every lab that follows.</p>
+        <p class="lead">By the end of this session your laptop will have Python, Jupyter Notebook, and the core scientific-computing stack installed and verified — ready for every lab that follows.</p>
         <div class="hero-meta">
           <div><strong>~40–50 min</strong>Time needed</div>
           <div><strong>Ubuntu 22.04 / 24.04</strong>Target OS</div>
@@ -288,7 +354,7 @@
     </div>
   </section>
 
-  <section id="overview">
+  <section id="lab0-overview">
     <div class="step-num">TODAY'S ROADMAP</div>
     <h2>Three things, in order</h2>
     <p class="section-lead">Each step depends on the one before it, so work through this page top to bottom rather than jumping around on your first pass.</p>
@@ -357,10 +423,10 @@
       <div class="terminal-bar">
         <div class="terminal-dots"><span></span><span></span><span></span></div>
         <div class="terminal-title">(venv) install-jupyter.sh</div>
-        <button class="copy-btn" data-copy="pip install jupyter">Copy</button>
+        <button class="copy-btn" data-copy="pip install notebook">Copy</button>
       </div>
       <div class="terminal-body">
-        <div class="line"><span class="prompt">(venv) $ </span><span class="cmd">pip install jupyter</span></div>
+        <div class="line"><span class="prompt">(venv) $ </span><span class="cmd">pip install notebook</span></div>
       </div>
     </div>
 
@@ -520,26 +586,429 @@ print("All good, NumPy", numpy.__version__)</div>
     </details>
   </section>
 
+</div>
+<!-- /LAB 0 -->
+
+<!-- ============================================================ -->
+<!-- LAB 1 — PYTHON BASICS                                        -->
+<!-- ============================================================ -->
+<div class="lab-view" id="lab-1">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Python for AI/ML — Lab Session 1</div>
+        <h1>Python basics: input, output & operators</h1>
+        <p class="lead">Seven short programs covering input/output, arithmetic, string handling, and basic formulas — the building blocks for everything else this semester.</p>
+        <div class="hero-meta">
+          <div><strong>7 questions</strong>In this lab</div>
+          <div><strong>Jupyter Notebook</strong>Run each in its own cell</div>
+          <div><strong>Completed</strong>Yesterday</div>
+        </div>
+      </div>
+      <div class="nb-cell">
+        <div class="nb-cell-head"><span class="nb-in">In&nbsp;[1]:</span></div>
+        <div class="nb-cell-body">print("Lab 1 — Python Basics")</div>
+        <div class="nb-out">Lab 1 — Python Basics</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lab1-overview">
+    <div class="step-num">QUESTIONS AT A GLANCE</div>
+    <h2>Seven questions</h2>
+    <p class="section-lead">Click any card, or use the "Q1–Q7" pills above, to jump straight to that question's code.</p>
+    <div class="overview-grid q-grid">
+      <a class="overview-card" href="#q1">
+        <div class="k">Q1</div>
+        <h4>Input & Output</h4>
+        <p>Student details, formatted display</p>
+      </a>
+      <a class="overview-card" href="#q2">
+        <div class="k">Q2</div>
+        <h4>Arithmetic Ops</h4>
+        <p>All seven operators on two numbers</p>
+      </a>
+      <a class="overview-card" href="#q3">
+        <div class="k">Q3</div>
+        <h4>Temp Conversion</h4>
+        <p>Celsius ⇄ Fahrenheit</p>
+      </a>
+      <a class="overview-card" href="#q4">
+        <div class="k">Q4</div>
+        <h4>Area & Perimeter</h4>
+        <p>Rectangle, then a circle</p>
+      </a>
+      <a class="overview-card" href="#q5">
+        <div class="k">Q5</div>
+        <h4>Simple Interest</h4>
+        <p>SI formula and total amount</p>
+      </a>
+      <a class="overview-card" href="#q6">
+        <div class="k">Q6</div>
+        <h4>String Ops</h4>
+        <p>Case, slicing, reversing</p>
+      </a>
+      <a class="overview-card" href="#q7">
+        <div class="k">Q7</div>
+        <h4>Name Formatter</h4>
+        <p>Concatenating a full name</p>
+      </a>
+    </div>
+  </section>
+
+  <section id="q1">
+    <div class="q-head"><span class="q-tag">Q1</span><h2 style="margin:0;">Basic Input and Output</h2></div>
+    <div class="q-prompt">
+      Write a Python program to accept the following details from a student:
+      <ul>
+        <li>Name</li>
+        <li>Roll number</li>
+        <li>Department</li>
+        <li>Semester</li>
+      </ul>
+      Display the information in a well-formatted manner.
+    </div>
+
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">q1_student_info.py</div>
+        <button class="copy-btn" data-copy="name = input(&quot;Enter your name: &quot;)\nroll_number = input(&quot;Enter your roll number: &quot;)\ndepartment = input(&quot;Enter your department: &quot;)\nsemester = input(&quot;Enter your semester: &quot;)\n\nprint(&quot;\\n--- Student Details ---&quot;)\nprint(f&quot;Name       : {name}&quot;)\nprint(f&quot;Roll No    : {roll_number}&quot;)\nprint(f&quot;Department : {department}&quot;)\nprint(f&quot;Semester   : {semester}&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">name = input("Enter your name: ")</div>
+        <div class="line code">roll_number = input("Enter your roll number: ")</div>
+        <div class="line code">department = input("Enter your department: ")</div>
+        <div class="line code">semester = input("Enter your semester: ")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("\n--- Student Details ---")</div>
+        <div class="line code">print(f"Name       : {name}")</div>
+        <div class="line code">print(f"Roll No    : {roll_number}")</div>
+        <div class="line code">print(f"Department : {department}")</div>
+        <div class="line code">print(f"Semester   : {semester}")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">output</div>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 q1_student_info.py</span></div>
+        <div class="line out">Enter your name: Lalrinliana</div>
+        <div class="line out">Enter your roll number: CS2023045</div>
+        <div class="line out">Enter your department: Computer Science</div>
+        <div class="line out">Enter your semester: 5</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">--- Student Details ---</div>
+        <div class="line out">Name       : Lalrinliana</div>
+        <div class="line out">Roll No    : CS2023045</div>
+        <div class="line out">Department : Computer Science</div>
+        <div class="line out">Semester   : 5</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="q2">
+    <div class="q-head"><span class="q-tag">Q2</span><h2 style="margin:0;">Arithmetic Operations</h2></div>
+    <div class="q-prompt">
+      Write a Python program to input two numbers and display:
+      <ul>
+        <li>Addition</li><li>Subtraction</li><li>Multiplication</li>
+        <li>Division</li><li>Floor division</li><li>Modulus</li><li>Exponentiation</li>
+      </ul>
+    </div>
+
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">q2_arithmetic.py</div>
+        <button class="copy-btn" data-copy="num1 = float(input(&quot;Enter first number: &quot;))\nnum2 = float(input(&quot;Enter second number: &quot;))\n\nprint(&quot;Addition       :&quot;, num1 + num2)\nprint(&quot;Subtraction    :&quot;, num1 - num2)\nprint(&quot;Multiplication :&quot;, num1 * num2)\nprint(&quot;Division       :&quot;, num1 / num2)\nprint(&quot;Floor Division :&quot;, num1 // num2)\nprint(&quot;Modulus        :&quot;, num1 % num2)\nprint(&quot;Exponentiation :&quot;, num1 ** num2)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">num1 = float(input("Enter first number: "))</div>
+        <div class="line code">num2 = float(input("Enter second number: "))</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Addition       :", num1 + num2)</div>
+        <div class="line code">print("Subtraction    :", num1 - num2)</div>
+        <div class="line code">print("Multiplication :", num1 * num2)</div>
+        <div class="line code">print("Division       :", num1 / num2)</div>
+        <div class="line code">print("Floor Division :", num1 // num2)</div>
+        <div class="line code">print("Modulus        :", num1 % num2)</div>
+        <div class="line code">print("Exponentiation :", num1 ** num2)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">output</div>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 q2_arithmetic.py</span></div>
+        <div class="line out">Enter first number: 12</div>
+        <div class="line out">Enter second number: 5</div>
+        <div class="line out">Addition       : 17.0</div>
+        <div class="line out">Subtraction    : 7.0</div>
+        <div class="line out">Multiplication : 60.0</div>
+        <div class="line out">Division       : 2.4</div>
+        <div class="line out">Floor Division : 2.0</div>
+        <div class="line out">Modulus        : 2.0</div>
+        <div class="line out">Exponentiation : 248832.0</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="q3">
+    <div class="q-head"><span class="q-tag">Q3</span><h2 style="margin:0;">Temperature Conversion</h2></div>
+    <div class="q-prompt">
+      Write a Python program to convert temperature from Celsius to Fahrenheit.<br>
+      Use: <code class="inline">F = (C × 9/5) + 32</code><br>
+      Also modify the program to convert Fahrenheit back to Celsius.
+    </div>
+
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">q3_temperature.py</div>
+        <button class="copy-btn" data-copy="celsius = float(input(&quot;Enter temperature in Celsius: &quot;))\nfahrenheit = (celsius * 9 / 5) + 32\nprint(f&quot;{celsius}°C = {fahrenheit}°F&quot;)\n\n# Convert Fahrenheit back to Celsius\nfahrenheit_in = float(input(&quot;Enter temperature in Fahrenheit: &quot;))\ncelsius_out = (fahrenheit_in - 32) * 5 / 9\nprint(f&quot;{fahrenheit_in}°F = {celsius_out}°C&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">celsius = float(input("Enter temperature in Celsius: "))</div>
+        <div class="line code">fahrenheit = (celsius * 9 / 5) + 32</div>
+        <div class="line code">print(f"{celsius}°C = {fahrenheit}°F")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line cmt"># Convert Fahrenheit back to Celsius</div>
+        <div class="line code">fahrenheit_in = float(input("Enter temperature in Fahrenheit: "))</div>
+        <div class="line code">celsius_out = (fahrenheit_in - 32) * 5 / 9</div>
+        <div class="line code">print(f"{fahrenheit_in}°F = {celsius_out}°C")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">output</div>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 q3_temperature.py</span></div>
+        <div class="line out">Enter temperature in Celsius: 37</div>
+        <div class="line out">37.0°C = 98.6°F</div>
+        <div class="line out">Enter temperature in Fahrenheit: 98.6</div>
+        <div class="line out">98.6°F = 37.0°C</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="q4">
+    <div class="q-head"><span class="q-tag">Q4</span><h2 style="margin:0;">Area and Perimeter</h2></div>
+    <div class="q-prompt">
+      Write a program to accept the length and breadth of a rectangle and calculate:
+      <ul><li>Area</li><li>Perimeter</li></ul>
+      Extend the program to calculate the area of a circle after accepting its radius.
+    </div>
+
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">q4_area_perimeter.py</div>
+        <button class="copy-btn" data-copy="length = float(input(&quot;Enter length of rectangle: &quot;))\nbreadth = float(input(&quot;Enter breadth of rectangle: &quot;))\n\narea = length * breadth\nperimeter = 2 * (length + breadth)\n\nprint(f&quot;Area of rectangle      : {area}&quot;)\nprint(f&quot;Perimeter of rectangle : {perimeter}&quot;)\n\n# Extend: area of a circle\nradius = float(input(&quot;Enter radius of circle: &quot;))\npi = 3.14159\ncircle_area = pi * radius ** 2\nprint(f&quot;Area of circle         : {circle_area}&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">length = float(input("Enter length of rectangle: "))</div>
+        <div class="line code">breadth = float(input("Enter breadth of rectangle: "))</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">area = length * breadth</div>
+        <div class="line code">perimeter = 2 * (length + breadth)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print(f"Area of rectangle      : {area}")</div>
+        <div class="line code">print(f"Perimeter of rectangle : {perimeter}")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line cmt"># Extend: area of a circle</div>
+        <div class="line code">radius = float(input("Enter radius of circle: "))</div>
+        <div class="line code">pi = 3.14159</div>
+        <div class="line code">circle_area = pi * radius ** 2</div>
+        <div class="line code">print(f"Area of circle         : {circle_area}")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">output</div>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 q4_area_perimeter.py</span></div>
+        <div class="line out">Enter length of rectangle: 10</div>
+        <div class="line out">Enter breadth of rectangle: 4</div>
+        <div class="line out">Area of rectangle      : 40.0</div>
+        <div class="line out">Perimeter of rectangle : 28.0</div>
+        <div class="line out">Enter radius of circle: 7</div>
+        <div class="line out">Area of circle         : 153.93791</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="q5">
+    <div class="q-head"><span class="q-tag">Q5</span><h2 style="margin:0;">Simple Interest</h2></div>
+    <div class="q-prompt">
+      Write a Python program to calculate simple interest.<br>
+      Use: <code class="inline">SI = (P × R × T) / 100</code><br>
+      where P = Principal amount, R = Rate of interest, T = Time. Display both the simple interest and total amount.
+    </div>
+
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">q5_simple_interest.py</div>
+        <button class="copy-btn" data-copy="principal = float(input(&quot;Enter principal amount: &quot;))\nrate = float(input(&quot;Enter rate of interest: &quot;))\ntime = float(input(&quot;Enter time (in years): &quot;))\n\nsimple_interest = (principal * rate * time) / 100\ntotal_amount = principal + simple_interest\n\nprint(f&quot;Simple Interest : {simple_interest}&quot;)\nprint(f&quot;Total Amount    : {total_amount}&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">principal = float(input("Enter principal amount: "))</div>
+        <div class="line code">rate = float(input("Enter rate of interest: "))</div>
+        <div class="line code">time = float(input("Enter time (in years): "))</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">simple_interest = (principal * rate * time) / 100</div>
+        <div class="line code">total_amount = principal + simple_interest</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print(f"Simple Interest : {simple_interest}")</div>
+        <div class="line code">print(f"Total Amount    : {total_amount}")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">output</div>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 q5_simple_interest.py</span></div>
+        <div class="line out">Enter principal amount: 10000</div>
+        <div class="line out">Enter rate of interest: 5</div>
+        <div class="line out">Enter time (in years): 2</div>
+        <div class="line out">Simple Interest : 1000.0</div>
+        <div class="line out">Total Amount    : 11000.0</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="q6">
+    <div class="q-head"><span class="q-tag">Q6</span><h2 style="margin:0;">String Operations</h2></div>
+    <div class="q-prompt">
+      Write a Python program that accepts a sentence from the user and displays:
+      <ul>
+        <li>Length of the sentence</li>
+        <li>Sentence in uppercase</li>
+        <li>Sentence in lowercase</li>
+        <li>First character</li>
+        <li>Last character</li>
+        <li>First five characters</li>
+        <li>Sentence in reverse order</li>
+      </ul>
+    </div>
+
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">q6_string_ops.py</div>
+        <button class="copy-btn" data-copy="sentence = input(&quot;Enter a sentence: &quot;)\n\nprint(&quot;Length                :&quot;, len(sentence))\nprint(&quot;Uppercase             :&quot;, sentence.upper())\nprint(&quot;Lowercase             :&quot;, sentence.lower())\nprint(&quot;First character       :&quot;, sentence[0])\nprint(&quot;Last character        :&quot;, sentence[-1])\nprint(&quot;First five characters :&quot;, sentence[:5])\nprint(&quot;Reversed sentence     :&quot;, sentence[::-1])">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">sentence = input("Enter a sentence: ")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Length                :", len(sentence))</div>
+        <div class="line code">print("Uppercase             :", sentence.upper())</div>
+        <div class="line code">print("Lowercase             :", sentence.lower())</div>
+        <div class="line code">print("First character       :", sentence[0])</div>
+        <div class="line code">print("Last character        :", sentence[-1])</div>
+        <div class="line code">print("First five characters :", sentence[:5])</div>
+        <div class="line code">print("Reversed sentence     :", sentence[::-1])</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">output</div>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 q6_string_ops.py</span></div>
+        <div class="line out">Enter a sentence: Mizo language processing is fun</div>
+        <div class="line out">Length                : 32</div>
+        <div class="line out">Uppercase             : MIZO LANGUAGE PROCESSING IS FUN</div>
+        <div class="line out">Lowercase             : mizo language processing is fun</div>
+        <div class="line out">First character       : M</div>
+        <div class="line out">Last character        : n</div>
+        <div class="line out">First five characters : Mizo&nbsp;</div>
+        <div class="line out">Reversed sentence     : nuf si gnissecorp egaugnal oziM</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="q7">
+    <div class="q-head"><span class="q-tag">Q7</span><h2 style="margin:0;">Name Formatter</h2></div>
+    <div class="q-prompt">
+      Accept the user's: First name, Middle name, Last name.<br>
+      Display the complete name using string concatenation.
+    </div>
+
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">q7_name_formatter.py</div>
+        <button class="copy-btn" data-copy="first_name = input(&quot;Enter first name: &quot;)\nmiddle_name = input(&quot;Enter middle name: &quot;)\nlast_name = input(&quot;Enter last name: &quot;)\n\nfull_name = first_name + &quot; &quot; + middle_name + &quot; &quot; + last_name\nprint(&quot;Full Name:&quot;, full_name)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">first_name = input("Enter first name: ")</div>
+        <div class="line code">middle_name = input("Enter middle name: ")</div>
+        <div class="line code">last_name = input("Enter last name: ")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">full_name = first_name + " " + middle_name + " " + last_name</div>
+        <div class="line code">print("Full Name:", full_name)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">output</div>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 q7_name_formatter.py</span></div>
+        <div class="line out">Enter first name: Zoram</div>
+        <div class="line out">Enter middle name: Lal</div>
+        <div class="line out">Enter last name: liana</div>
+        <div class="line out">Full Name: Zoram Lal liana</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- /LAB 1 -->
+
 </main>
 
 <footer>
   <div class="wrap">
-    <p>Python for AI/ML · Lab 1 of the semester</p>
+    <p>Python for AI/ML · Lab portal</p>
   </div>
 </footer>
 
 <script>
-  // Hero typing animation
+  // Hero typing animation (Lab 0 only)
   (function(){
     const el = document.getElementById('hero-terminal');
+    if(!el) return;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const lines = [
       {type:'cmd', text:'whoami'},
       {type:'out', text:'student'},
       {type:'cmd', text:'python3 --version'},
       {type:'out', text:'Python 3.12.3'},
-      {type:'cmd', text:'echo "ready for lab 1"'},
-      {type:'out', text:'ready for lab 1'}
+      {type:'cmd', text:'echo "ready for lab 0"'},
+      {type:'out', text:'ready for lab 0'}
     ];
 
     function renderStatic(){
@@ -597,20 +1066,61 @@ print("All good, NumPy", numpy.__version__)</div>
     });
   });
 
-  // Scroll-spy nav
+  // Tabs (unused currently, kept for future tab panels)
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const group = btn.closest('.tabs');
+      group.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      group.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      group.querySelector(`.tab-panel[data-panel="${btn.dataset.tab}"]`).classList.add('active');
+    });
+  });
+
+  // ---------- Lab switcher ----------
+  const labSelect = document.getElementById('lab-select');
+  const labViews = document.querySelectorAll('.lab-view');
+  const pillNavs = {
+    'lab-0': document.getElementById('pillnav-lab-0'),
+    'lab-1': document.getElementById('pillnav-lab-1')
+  };
+
+  function showLab(labId, scrollTop){
+    labViews.forEach(v=> v.classList.toggle('active', v.id === labId));
+    Object.keys(pillNavs).forEach(key=>{
+      pillNavs[key].style.display = (key === labId) ? 'flex' : 'none';
+    });
+    if(scrollTop) window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
+  }
+
+  labSelect.addEventListener('change', ()=>{
+    showLab(labSelect.value, true);
+  });
+
+  // Deep-link support: ?lab=lab-1 or #q3 style hash pointing into a lab
   (function(){
-    const sections = ['python','jupyter','environment','packages','verify','troubleshooting']
-      .map(id=>document.getElementById(id)).filter(Boolean);
-    const links = document.querySelectorAll('#pillnav a');
-    const byId = {};
-    links.forEach(l=> byId[l.getAttribute('href').slice(1)] = l);
+    const hash = window.location.hash.replace('#','');
+    const lab1Ids = ['q1','q2','q3','q4','q5','q6','q7','lab1-overview'];
+    if(lab1Ids.includes(hash)){
+      labSelect.value = 'lab-1';
+      showLab('lab-1', false);
+    }
+  })();
+
+  // ---------- Scroll-spy nav (works across whichever lab is visible) ----------
+  (function(){
+    const allSectionIds = [
+      'python','jupyter','environment','packages','verify','troubleshooting',
+      'q1','q2','q3','q4','q5','q6','q7'
+    ];
+    const sections = allSectionIds.map(id=>document.getElementById(id)).filter(Boolean);
 
     const obs = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
-          links.forEach(l=>l.classList.remove('active'));
-          const link = byId[entry.target.id];
-          if(link) link.classList.add('active');
+          document.querySelectorAll('nav.pills a').forEach(l=>l.classList.remove('active'));
+          const links = document.querySelectorAll(`nav.pills a[href="#${entry.target.id}"]`);
+          links.forEach(l=>l.classList.add('active'));
         }
       });
     }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
@@ -621,4 +1131,3 @@ print("All good, NumPy", numpy.__version__)</div>
 
 </body>
 </html>
-
