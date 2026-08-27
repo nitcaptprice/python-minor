@@ -300,6 +300,7 @@
       <select id="lab-select">
         <option value="lab-0">Lab 0 · Environment Setup</option>
         <option value="lab-1">Lab 1 · Python Basics</option>
+        <option value="lab-2">Lab 2 · Loops, Strings & Data Structures</option>
       </select>
     </div>
   </div>
@@ -320,6 +321,28 @@
       <a href="#q5">Q5</a>
       <a href="#q6">Q6</a>
       <a href="#q7">Q7</a>
+    </nav>
+    <nav class="pills" id="pillnav-lab-2" style="display:none;">
+      <a href="#l2q1">Q1</a>
+      <a href="#l2q2">Q2</a>
+      <a href="#l2q3">Q3</a>
+      <a href="#l2q4">Q4</a>
+      <a href="#l2q5">Q5</a>
+      <a href="#l2q6">Q6</a>
+      <a href="#l2q7">Q7</a>
+      <a href="#l2q8">Q8</a>
+      <a href="#l2q9">Q9</a>
+      <a href="#l2q10">Q10</a>
+      <a href="#l2q11">Q11</a>
+      <a href="#l2q12">Q12</a>
+      <a href="#l2q13">Q13</a>
+      <a href="#l2q14">Q14</a>
+      <a href="#l2q15">Q15</a>
+      <a href="#l2q16">Q16</a>
+      <a href="#l2q17">Q17</a>
+      <a href="#l2q18">Q18</a>
+      <a href="#l2q19">Q19</a>
+      <a href="#l2q20">Q20</a>
     </nav>
   </div>
 </header>
@@ -988,6 +1011,760 @@ print("All good, NumPy", numpy.__version__)</div>
 </div>
 <!-- /LAB 1 -->
 
+<!-- ============================================================ -->
+<!-- LAB 2 — LOOPS, STRINGS & DATA STRUCTURES                     -->
+<!-- ============================================================ -->
+<div class="lab-view" id="lab-2">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Python for AI/ML — Lab Session 2</div>
+        <h1>Operators, loops, strings & data structures</h1>
+        <p class="lead">Twenty programs covering factorials, list traversal, string manipulation, prime numbers, and simple classification logic — the patterns you'll reuse constantly when preprocessing text and data.</p>
+        <div class="hero-meta">
+          <div><strong>20 questions</strong>In this lab</div>
+          <div><strong>Jupyter Notebook</strong>Run each in its own cell</div>
+          <div><strong>Topics</strong>Loops · lists · strings · dicts</div>
+        </div>
+      </div>
+      <div class="nb-cell">
+        <div class="nb-cell-head"><span class="nb-in">In&nbsp;[1]:</span></div>
+        <div class="nb-cell-body">print("Lab 2 — Loops & Data Structures")</div>
+        <div class="nb-out">Lab 2 — Loops & Data Structures</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lab2-overview">
+    <div class="step-num">QUESTIONS AT A GLANCE</div>
+    <h2>Twenty questions</h2>
+    <p class="section-lead">Click any card, or use the "Q1–Q20" pills above, to jump straight to that question's code.</p>
+    <div class="overview-grid q-grid">
+      <a class="overview-card" href="#l2q1"><div class="k">Q1</div><h4>Factorial</h4><p>Loop-based factorial</p></a>
+      <a class="overview-card" href="#l2q2"><div class="k">Q2</div><h4>Even & Odd Count</h4><p>Count from a fixed list</p></a>
+      <a class="overview-card" href="#l2q3"><div class="k">Q3</div><h4>Largest & Smallest</h4><p>No max()/min() allowed</p></a>
+      <a class="overview-card" href="#l2q4"><div class="k">Q4</div><h4>Linear Search</h4><p>Find element in a list</p></a>
+      <a class="overview-card" href="#l2q5"><div class="k">Q5</div><h4>Sum of Elements</h4><p>No built-in sum()</p></a>
+      <a class="overview-card" href="#l2q6"><div class="k">Q6</div><h4>Count Vowels</h4><p>In a user sentence</p></a>
+      <a class="overview-card" href="#l2q7"><div class="k">Q7</div><h4>Reverse a String</h4><p>Using a loop, not slicing</p></a>
+      <a class="overview-card" href="#l2q8"><div class="k">Q8</div><h4>Palindrome Check</h4><p>Word equals its reverse</p></a>
+      <a class="overview-card" href="#l2q9"><div class="k">Q9</div><h4>Character Count</h4><p>Occurrences of one char</p></a>
+      <a class="overview-card" href="#l2q10"><div class="k">Q10</div><h4>Digit Count</h4><p>While-loop digit counter</p></a>
+      <a class="overview-card" href="#l2q11"><div class="k">Q11</div><h4>Sum of Digits</h4><p>Digit-by-digit total</p></a>
+      <a class="overview-card" href="#l2q12"><div class="k">Q12</div><h4>Prime Check</h4><p>Is N prime?</p></a>
+      <a class="overview-card" href="#l2q13"><div class="k">Q13</div><h4>Primes in Range</h4><p>Between two integers</p></a>
+      <a class="overview-card" href="#l2q14"><div class="k">Q14</div><h4>Fibonacci</h4><p>First N terms</p></a>
+      <a class="overview-card" href="#l2q15"><div class="k">Q15</div><h4>Password Check</h4><p>Length, digit, uppercase</p></a>
+      <a class="overview-card" href="#l2q16"><div class="k">Q16</div><h4>Temperature Classifier</h4><p>Normal / Moderate / High</p></a>
+      <a class="overview-card" href="#l2q17"><div class="k">Q17</div><h4>Label Percentages</h4><p>Normal vs Abnormal counts</p></a>
+      <a class="overview-card" href="#l2q18"><div class="k">Q18</div><h4>Heart Rate Classifier</h4><p>Low / Normal / High</p></a>
+      <a class="overview-card" href="#l2q19"><div class="k">Q19</div><h4>Clean & Average</h4><p>Filter -1 missing values</p></a>
+      <a class="overview-card" href="#l2q20"><div class="k">Q20</div><h4>Pass/Fail Predictor</h4><p>Study hours, multiple students</p></a>
+    </div>
+  </section>
+
+  <section id="l2q1">
+    <div class="q-head"><span class="q-tag">Q1</span><h2 style="margin:0;">Factorial Using a Loop</h2></div>
+    <div class="q-prompt">Write a program to calculate the factorial of a positive integer using a loop.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q1_factorial.py</div>
+        <button class="copy-btn" data-copy="n = int(input(&quot;Enter a positive integer: &quot;))\nfactorial = 1\nfor i in range(1, n + 1):\n    factorial *= i\n\nprint(f&quot;Factorial of {n} is {factorial}&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">n = int(input("Enter a positive integer: "))</div>
+        <div class="line code">factorial = 1</div>
+        <div class="line code">for i in range(1, n + 1):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;factorial *= i</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print(f"Factorial of {n} is {factorial}")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q1_factorial.py</span></div>
+        <div class="line out">Enter a positive integer: 5</div>
+        <div class="line out">Factorial of 5 is 120</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q2">
+    <div class="q-head"><span class="q-tag">Q2</span><h2 style="margin:0;">Count Even and Odd Values</h2></div>
+    <div class="q-prompt">Given <code class="inline">numbers = [12, 7, 9, 20, 15, 24, 31, 42]</code>, write a program to count the number of even and odd values.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q2_even_odd_count.py</div>
+        <button class="copy-btn" data-copy="numbers = [12, 7, 9, 20, 15, 24, 31, 42]\neven_count = 0\nodd_count = 0\n\nfor num in numbers:\n    if num % 2 == 0:\n        even_count += 1\n    else:\n        odd_count += 1\n\nprint(&quot;Even numbers:&quot;, even_count)\nprint(&quot;Odd numbers :&quot;, odd_count)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">numbers = [12, 7, 9, 20, 15, 24, 31, 42]</div>
+        <div class="line code">even_count = 0</div>
+        <div class="line code">odd_count = 0</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">for num in numbers:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if num % 2 == 0:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;even_count += 1</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;odd_count += 1</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Even numbers:", even_count)</div>
+        <div class="line code">print("Odd numbers :", odd_count)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q2_even_odd_count.py</span></div>
+        <div class="line out">Even numbers: 4</div>
+        <div class="line out">Odd numbers : 4</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q3">
+    <div class="q-head"><span class="q-tag">Q3</span><h2 style="margin:0;">Largest and Smallest (No max/min)</h2></div>
+    <div class="q-prompt">Create a list of numbers and find the largest and smallest elements using loops only. Do not use <code class="inline">max()</code> or <code class="inline">min()</code>.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q3_largest_smallest.py</div>
+        <button class="copy-btn" data-copy="numbers = [45, 12, 78, 3, 99, 24, 67]\n\nlargest = numbers[0]\nsmallest = numbers[0]\n\nfor num in numbers:\n    if num > largest:\n        largest = num\n    if num < smallest:\n        smallest = num\n\nprint(&quot;Largest  :&quot;, largest)\nprint(&quot;Smallest :&quot;, smallest)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">numbers = [45, 12, 78, 3, 99, 24, 67]</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">largest = numbers[0]</div>
+        <div class="line code">smallest = numbers[0]</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">for num in numbers:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if num > largest:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;largest = num</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if num < smallest:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;smallest = num</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Largest  :", largest)</div>
+        <div class="line code">print("Smallest :", smallest)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q3_largest_smallest.py</span></div>
+        <div class="line out">Largest  : 99</div>
+        <div class="line out">Smallest : 3</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q4">
+    <div class="q-head"><span class="q-tag">Q4</span><h2 style="margin:0;">Linear Search in a List</h2></div>
+    <div class="q-prompt">Create a list containing ten integers. Accept a number from the user and check whether it exists in the list. Display "Element found" or "Element not found".</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q4_linear_search.py</div>
+        <button class="copy-btn" data-copy="numbers = [4, 8, 15, 16, 23, 42, 7, 11, 19, 30]\ntarget = int(input(&quot;Enter a number to search: &quot;))\n\nfound = False\nfor num in numbers:\n    if num == target:\n        found = True\n        break\n\nif found:\n    print(&quot;Element found&quot;)\nelse:\n    print(&quot;Element not found&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">numbers = [4, 8, 15, 16, 23, 42, 7, 11, 19, 30]</div>
+        <div class="line code">target = int(input("Enter a number to search: "))</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">found = False</div>
+        <div class="line code">for num in numbers:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if num == target:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;found = True</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">if found:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Element found")</div>
+        <div class="line code">else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Element not found")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q4_linear_search.py</span></div>
+        <div class="line out">Enter a number to search: 16</div>
+        <div class="line out">Element found</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q5">
+    <div class="q-head"><span class="q-tag">Q5</span><h2 style="margin:0;">Sum of Elements (No sum())</h2></div>
+    <div class="q-prompt">Create <code class="inline">numbers = [10, 20, 30, 40, 50]</code> and find the sum of all elements using a for loop. Do not use the built-in <code class="inline">sum()</code> function.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q5_sum_no_builtin.py</div>
+        <button class="copy-btn" data-copy="numbers = [10, 20, 30, 40, 50]\ntotal = 0\n\nfor num in numbers:\n    total += num\n\nprint(&quot;Sum of all elements:&quot;, total)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">numbers = [10, 20, 30, 40, 50]</div>
+        <div class="line code">total = 0</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">for num in numbers:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;total += num</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Sum of all elements:", total)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q5_sum_no_builtin.py</span></div>
+        <div class="line out">Sum of all elements: 150</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q6">
+    <div class="q-head"><span class="q-tag">Q6</span><h2 style="margin:0;">Count Vowels in a Sentence</h2></div>
+    <div class="q-prompt">Accept a sentence from the user and count the total number of vowels (a, e, i, o, u).</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q6_count_vowels.py</div>
+        <button class="copy-btn" data-copy="sentence = input(&quot;Enter a sentence: &quot;)\nvowels = &quot;aeiouAEIOU&quot;\n\ncount = 0\nfor ch in sentence:\n    if ch in vowels:\n        count += 1\n\nprint(&quot;Number of vowels:&quot;, count)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">sentence = input("Enter a sentence: ")</div>
+        <div class="line code">vowels = "aeiouAEIOU"</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">count = 0</div>
+        <div class="line code">for ch in sentence:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if ch in vowels:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Number of vowels:", count)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q6_count_vowels.py</span></div>
+        <div class="line out">Enter a sentence: Mizo language processing</div>
+        <div class="line out">Number of vowels: 9</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q7">
+    <div class="q-head"><span class="q-tag">Q7</span><h2 style="margin:0;">Reverse a String Using a Loop</h2></div>
+    <div class="q-prompt">Write a Python program to accept a string and display it in reverse. Try to solve the problem using a loop rather than only slicing.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q7_reverse_string.py</div>
+        <button class="copy-btn" data-copy="text = input(&quot;Enter a string: &quot;)\nreversed_text = &quot;&quot;\n\nfor ch in text:\n    reversed_text = ch + reversed_text\n\nprint(&quot;Reversed string:&quot;, reversed_text)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">text = input("Enter a string: ")</div>
+        <div class="line code">reversed_text = ""</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">for ch in text:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;reversed_text = ch + reversed_text</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Reversed string:", reversed_text)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q7_reverse_string.py</span></div>
+        <div class="line out">Enter a string: python</div>
+        <div class="line out">Reversed string: nohtyp</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q8">
+    <div class="q-head"><span class="q-tag">Q8</span><h2 style="margin:0;">Palindrome Check</h2></div>
+    <div class="q-prompt">Write a program to check whether a word is a palindrome.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q8_palindrome.py</div>
+        <button class="copy-btn" data-copy="word = input(&quot;Enter a word: &quot;)\n\nif word == word[::-1]:\n    print(&quot;The word is a palindrome&quot;)\nelse:\n    print(&quot;The word is not a palindrome&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">word = input("Enter a word: ")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">if word == word[::-1]:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("The word is a palindrome")</div>
+        <div class="line code">else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("The word is not a palindrome")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q8_palindrome.py</span></div>
+        <div class="line out">Enter a word: malayalam</div>
+        <div class="line out">The word is a palindrome</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q9">
+    <div class="q-head"><span class="q-tag">Q9</span><h2 style="margin:0;">Count Character Occurrences</h2></div>
+    <div class="q-prompt">Accept a string and count how many times a particular character occurs.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q9_char_count.py</div>
+        <button class="copy-btn" data-copy="text = input(&quot;Enter a string: &quot;)\nchar = input(&quot;Enter the character to count: &quot;)\n\ncount = 0\nfor ch in text:\n    if ch == char:\n        count += 1\n\nprint(f&quot;'{char}' occurs {count} times&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">text = input("Enter a string: ")</div>
+        <div class="line code">char = input("Enter the character to count: ")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">count = 0</div>
+        <div class="line code">for ch in text:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if ch == char:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print(f"'{char}' occurs {count} times")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q9_char_count.py</span></div>
+        <div class="line out">Enter a string: mississippi</div>
+        <div class="line out">Enter the character to count: s</div>
+        <div class="line out">'s' occurs 4 times</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q10">
+    <div class="q-head"><span class="q-tag">Q10</span><h2 style="margin:0;">Count Digits (While Loop)</h2></div>
+    <div class="q-prompt">Write a Python program using a while loop to count the number of digits in an integer.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q10_count_digits.py</div>
+        <button class="copy-btn" data-copy="num = int(input(&quot;Enter an integer: &quot;))\nn = abs(num)\ncount = 0\n\nif n == 0:\n    count = 1\n\nwhile n > 0:\n    count += 1\n    n = n // 10\n\nprint(&quot;Number of digits:&quot;, count)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">num = int(input("Enter an integer: "))</div>
+        <div class="line code">n = abs(num)</div>
+        <div class="line code">count = 0</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">if n == 0:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;count = 1</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">while n > 0:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;count += 1</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;n = n // 10</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Number of digits:", count)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q10_count_digits.py</span></div>
+        <div class="line out">Enter an integer: 758294</div>
+        <div class="line out">Number of digits: 6</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q11">
+    <div class="q-head"><span class="q-tag">Q11</span><h2 style="margin:0;">Sum of Digits</h2></div>
+    <div class="q-prompt">Write a program to calculate the sum of digits of a number.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q11_sum_of_digits.py</div>
+        <button class="copy-btn" data-copy="num = int(input(&quot;Enter a number: &quot;))\nn = abs(num)\ndigit_sum = 0\n\nwhile n > 0:\n    digit_sum += n % 10\n    n = n // 10\n\nprint(&quot;Sum of digits:&quot;, digit_sum)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">num = int(input("Enter a number: "))</div>
+        <div class="line code">n = abs(num)</div>
+        <div class="line code">digit_sum = 0</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">while n > 0:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;digit_sum += n % 10</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;n = n // 10</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Sum of digits:", digit_sum)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q11_sum_of_digits.py</span></div>
+        <div class="line out">Enter a number: 4521</div>
+        <div class="line out">Sum of digits: 12</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q12">
+    <div class="q-head"><span class="q-tag">Q12</span><h2 style="margin:0;">Prime Number Check</h2></div>
+    <div class="q-prompt">Write a program to determine whether a given positive integer is a prime number.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q12_prime_check.py</div>
+        <button class="copy-btn" data-copy="num = int(input(&quot;Enter a positive integer: &quot;))\nis_prime = True\n\nif num < 2:\n    is_prime = False\nelse:\n    for i in range(2, int(num ** 0.5) + 1):\n        if num % i == 0:\n            is_prime = False\n            break\n\nif is_prime:\n    print(f&quot;{num} is a prime number&quot;)\nelse:\n    print(f&quot;{num} is not a prime number&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">num = int(input("Enter a positive integer: "))</div>
+        <div class="line code">is_prime = True</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">if num < 2:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;is_prime = False</div>
+        <div class="line code">else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;for i in range(2, int(num ** 0.5) + 1):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if num % i == 0:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is_prime = False</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">if is_prime:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print(f"{num} is a prime number")</div>
+        <div class="line code">else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print(f"{num} is not a prime number")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q12_prime_check.py</span></div>
+        <div class="line out">Enter a positive integer: 29</div>
+        <div class="line out">29 is a prime number</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q13">
+    <div class="q-head"><span class="q-tag">Q13</span><h2 style="margin:0;">Primes Between Two Integers</h2></div>
+    <div class="q-prompt">Accept two integers and display all prime numbers between them.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q13_primes_in_range.py</div>
+        <button class="copy-btn" data-copy="start = int(input(&quot;Enter the first integer: &quot;))\nend = int(input(&quot;Enter the second integer: &quot;))\n\nprint(f&quot;Prime numbers between {start} and {end}:&quot;)\nfor num in range(start, end + 1):\n    if num < 2:\n        continue\n    is_prime = True\n    for i in range(2, int(num ** 0.5) + 1):\n        if num % i == 0:\n            is_prime = False\n            break\n    if is_prime:\n        print(num, end=&quot; &quot;)\nprint()">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">start = int(input("Enter the first integer: "))</div>
+        <div class="line code">end = int(input("Enter the second integer: "))</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print(f"Prime numbers between {start} and {end}:")</div>
+        <div class="line code">for num in range(start, end + 1):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if num < 2:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;is_prime = True</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;for i in range(2, int(num ** 0.5) + 1):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if num % i == 0:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is_prime = False</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if is_prime:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(num, end=" ")</div>
+        <div class="line code">print()</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q13_primes_in_range.py</span></div>
+        <div class="line out">Enter the first integer: 10</div>
+        <div class="line out">Enter the second integer: 40</div>
+        <div class="line out">Prime numbers between 10 and 40:</div>
+        <div class="line out">11 13 17 19 23 29 31 37</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q14">
+    <div class="q-head"><span class="q-tag">Q14</span><h2 style="margin:0;">First N Fibonacci Terms</h2></div>
+    <div class="q-prompt">Write a Python program to generate the first N terms of the Fibonacci sequence.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q14_fibonacci.py</div>
+        <button class="copy-btn" data-copy="n = int(input(&quot;Enter the number of terms: &quot;))\na, b = 0, 1\nfib_series = []\n\nfor _ in range(n):\n    fib_series.append(a)\n    a, b = b, a + b\n\nprint(f&quot;First {n} Fibonacci terms:&quot;, fib_series)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">n = int(input("Enter the number of terms: "))</div>
+        <div class="line code">a, b = 0, 1</div>
+        <div class="line code">fib_series = []</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">for _ in range(n):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;fib_series.append(a)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;a, b = b, a + b</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print(f"First {n} Fibonacci terms:", fib_series)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q14_fibonacci.py</span></div>
+        <div class="line out">Enter the number of terms: 10</div>
+        <div class="line out">First 10 Fibonacci terms: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q15">
+    <div class="q-head"><span class="q-tag">Q15</span><h2 style="margin:0;">Password Strength Check</h2></div>
+    <div class="q-prompt">Accept a password and check whether its length is at least 8 characters, it contains at least one digit, and at least one uppercase letter. Display "Valid Password" or "Invalid Password".</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q15_password_check.py</div>
+        <button class="copy-btn" data-copy="password = input(&quot;Enter a password: &quot;)\n\nhas_digit = any(ch.isdigit() for ch in password)\nhas_upper = any(ch.isupper() for ch in password)\n\nif len(password) >= 8 and has_digit and has_upper:\n    print(&quot;Valid Password&quot;)\nelse:\n    print(&quot;Invalid Password&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">password = input("Enter a password: ")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">has_digit = any(ch.isdigit() for ch in password)</div>
+        <div class="line code">has_upper = any(ch.isupper() for ch in password)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">if len(password) >= 8 and has_digit and has_upper:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Valid Password")</div>
+        <div class="line code">else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Invalid Password")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q15_password_check.py</span></div>
+        <div class="line out">Enter a password: Mizoram2026</div>
+        <div class="line out">Valid Password</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q16">
+    <div class="q-head"><span class="q-tag">Q16</span><h2 style="margin:0;">Temperature Classifier</h2></div>
+    <div class="q-prompt">Given <code class="inline">temperature = [36.5, 37.1, 38.5, 36.8, 39.2, 37.4]</code>, classify each reading as Normal (&lt;37.5), Moderate (37.5 to 38.0), or High (&gt;38.0).</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q16_temp_classifier.py</div>
+        <button class="copy-btn" data-copy="temperature = [36.5, 37.1, 38.5, 36.8, 39.2, 37.4]\n\nfor temp in temperature:\n    if temp < 37.5:\n        status = &quot;Normal&quot;\n    elif temp <= 38.0:\n        status = &quot;Moderate&quot;\n    else:\n        status = &quot;High&quot;\n    print(f&quot;{temp}°C -> {status}&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">temperature = [36.5, 37.1, 38.5, 36.8, 39.2, 37.4]</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">for temp in temperature:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if temp < 37.5:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status = "Normal"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;elif temp <= 38.0:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status = "Moderate"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status = "High"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print(f"{temp}°C -> {status}")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q16_temp_classifier.py</span></div>
+        <div class="line out">36.5°C -> Normal</div>
+        <div class="line out">37.1°C -> Normal</div>
+        <div class="line out">38.5°C -> High</div>
+        <div class="line out">36.8°C -> Normal</div>
+        <div class="line out">39.2°C -> High</div>
+        <div class="line out">37.4°C -> Normal</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q17">
+    <div class="q-head"><span class="q-tag">Q17</span><h2 style="margin:0;">Label Counts and Percentages</h2></div>
+    <div class="q-prompt">Given <code class="inline">labels = ["Normal", "Abnormal", "Normal", "Normal", "Abnormal", "Normal"]</code>, count the number and percentage of Normal and Abnormal samples.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q17_label_percentages.py</div>
+        <button class="copy-btn" data-copy="labels = [&quot;Normal&quot;, &quot;Abnormal&quot;, &quot;Normal&quot;, &quot;Normal&quot;, &quot;Abnormal&quot;, &quot;Normal&quot;]\n\nnormal_count = 0\nabnormal_count = 0\nfor label in labels:\n    if label == &quot;Normal&quot;:\n        normal_count += 1\n    else:\n        abnormal_count += 1\n\ntotal = len(labels)\nnormal_pct = (normal_count / total) * 100\nabnormal_pct = (abnormal_count / total) * 100\n\nprint(f&quot;Normal   : {normal_count} ({normal_pct:.1f}%)&quot;)\nprint(f&quot;Abnormal : {abnormal_count} ({abnormal_pct:.1f}%)&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">labels = ["Normal", "Abnormal", "Normal", "Normal", "Abnormal", "Normal"]</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">normal_count = 0</div>
+        <div class="line code">abnormal_count = 0</div>
+        <div class="line code">for label in labels:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if label == "Normal":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;normal_count += 1</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;abnormal_count += 1</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">total = len(labels)</div>
+        <div class="line code">normal_pct = (normal_count / total) * 100</div>
+        <div class="line code">abnormal_pct = (abnormal_count / total) * 100</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print(f"Normal   : {normal_count} ({normal_pct:.1f}%)")</div>
+        <div class="line code">print(f"Abnormal : {abnormal_count} ({abnormal_pct:.1f}%)")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q17_label_percentages.py</span></div>
+        <div class="line out">Normal   : 4 (66.7%)</div>
+        <div class="line out">Abnormal : 2 (33.3%)</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q18">
+    <div class="q-head"><span class="q-tag">Q18</span><h2 style="margin:0;">Heart Rate Classifier</h2></div>
+    <div class="q-prompt">Given <code class="inline">heart_rate = [72, 85, 102, 65, 98, 110, 76]</code>, classify each value as Low (&lt;60), Normal (60-100), or High (&gt;100).</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q18_heart_rate_classifier.py</div>
+        <button class="copy-btn" data-copy="heart_rate = [72, 85, 102, 65, 98, 110, 76]\n\nfor hr in heart_rate:\n    if hr < 60:\n        status = &quot;Low&quot;\n    elif hr <= 100:\n        status = &quot;Normal&quot;\n    else:\n        status = &quot;High&quot;\n    print(f&quot;{hr} bpm -> {status}&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">heart_rate = [72, 85, 102, 65, 98, 110, 76]</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">for hr in heart_rate:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if hr < 60:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status = "Low"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;elif hr <= 100:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status = "Normal"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status = "High"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print(f"{hr} bpm -> {status}")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q18_heart_rate_classifier.py</span></div>
+        <div class="line out">72 bpm -> Normal</div>
+        <div class="line out">85 bpm -> Normal</div>
+        <div class="line out">102 bpm -> High</div>
+        <div class="line out">65 bpm -> Normal</div>
+        <div class="line out">98 bpm -> Normal</div>
+        <div class="line out">110 bpm -> High</div>
+        <div class="line out">76 bpm -> Normal</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q19">
+    <div class="q-head"><span class="q-tag">Q19</span><h2 style="margin:0;">Clean Missing Values and Average</h2></div>
+    <div class="q-prompt">Given <code class="inline">data = [23, 45, -1, 67, 89, -1, 34, 56]</code>, assume -1 represents a missing/invalid value. Create a new list containing only valid values and calculate their average.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q19_clean_average.py</div>
+        <button class="copy-btn" data-copy="data = [23, 45, -1, 67, 89, -1, 34, 56]\n\nvalid_values = []\nfor value in data:\n    if value != -1:\n        valid_values.append(value)\n\ntotal = 0\nfor value in valid_values:\n    total += value\naverage = round(total / len(valid_values), 2)\n\nprint(&quot;Valid values:&quot;, valid_values)\nprint(&quot;Average     :&quot;, average)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">data = [23, 45, -1, 67, 89, -1, 34, 56]</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">valid_values = []</div>
+        <div class="line code">for value in data:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if value != -1:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valid_values.append(value)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">total = 0</div>
+        <div class="line code">for value in valid_values:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;total += value</div>
+        <div class="line code">average = round(total / len(valid_values), 2)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Valid values:", valid_values)</div>
+        <div class="line code">print("Average     :", average)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q19_clean_average.py</span></div>
+        <div class="line out">Valid values: [23, 45, 67, 89, 34, 56]</div>
+        <div class="line out">Average     : 52.33</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l2q20">
+    <div class="q-head"><span class="q-tag">Q20</span><h2 style="margin:0;">Pass/Fail Predictor</h2></div>
+    <div class="q-prompt">Accept study hours from the user. Predict Pass if study hours &gt;= 5, otherwise Fail. Extend the program for several students and count predicted passes and failures.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l2q20_pass_fail.py</div>
+        <button class="copy-btn" data-copy="n = int(input(&quot;Enter number of students: &quot;))\npass_count = 0\nfail_count = 0\n\nfor i in range(1, n + 1):\n    hours = float(input(f&quot;Enter study hours for student {i}: &quot;))\n    if hours >= 5:\n        result = &quot;Pass&quot;\n        pass_count += 1\n    else:\n        result = &quot;Fail&quot;\n        fail_count += 1\n    print(f&quot;Student {i}: {result}&quot;)\n\nprint(f&quot;\\nPredicted Passes: {pass_count}&quot;)\nprint(f&quot;Predicted Fails : {fail_count}&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">n = int(input("Enter number of students: "))</div>
+        <div class="line code">pass_count = 0</div>
+        <div class="line code">fail_count = 0</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">for i in range(1, n + 1):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;hours = float(input(f"Enter study hours for student {i}: "))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if hours >= 5:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = "Pass"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass_count += 1</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = "Fail"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fail_count += 1</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print(f"Student {i}: {result}")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print(f"\nPredicted Passes: {pass_count}")</div>
+        <div class="line code">print(f"Predicted Fails : {fail_count}")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l2q20_pass_fail.py</span></div>
+        <div class="line out">Enter number of students: 4</div>
+        <div class="line out">Enter study hours for student 1: 6</div>
+        <div class="line out">Student 1: Pass</div>
+        <div class="line out">Enter study hours for student 2: 3</div>
+        <div class="line out">Student 2: Fail</div>
+        <div class="line out">Enter study hours for student 3: 7</div>
+        <div class="line out">Student 3: Pass</div>
+        <div class="line out">Enter study hours for student 4: 4</div>
+        <div class="line out">Student 4: Fail</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">Predicted Passes: 2</div>
+        <div class="line out">Predicted Fails : 2</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- /LAB 2 -->
+
 </main>
 
 <footer>
@@ -1082,7 +1859,8 @@ print("All good, NumPy", numpy.__version__)</div>
   const labViews = document.querySelectorAll('.lab-view');
   const pillNavs = {
     'lab-0': document.getElementById('pillnav-lab-0'),
-    'lab-1': document.getElementById('pillnav-lab-1')
+    'lab-1': document.getElementById('pillnav-lab-1'),
+    'lab-2': document.getElementById('pillnav-lab-2')
   };
 
   function showLab(labId, scrollTop){
@@ -1101,9 +1879,13 @@ print("All good, NumPy", numpy.__version__)</div>
   (function(){
     const hash = window.location.hash.replace('#','');
     const lab1Ids = ['q1','q2','q3','q4','q5','q6','q7','lab1-overview'];
+    const lab2Ids = ['lab2-overview','l2q1','l2q2','l2q3','l2q4','l2q5','l2q6','l2q7','l2q8','l2q9','l2q10','l2q11','l2q12','l2q13','l2q14','l2q15','l2q16','l2q17','l2q18','l2q19','l2q20'];
     if(lab1Ids.includes(hash)){
       labSelect.value = 'lab-1';
       showLab('lab-1', false);
+    } else if(lab2Ids.includes(hash)){
+      labSelect.value = 'lab-2';
+      showLab('lab-2', false);
     }
   })();
 
@@ -1111,7 +1893,9 @@ print("All good, NumPy", numpy.__version__)</div>
   (function(){
     const allSectionIds = [
       'python','jupyter','environment','packages','verify','troubleshooting',
-      'q1','q2','q3','q4','q5','q6','q7'
+      'q1','q2','q3','q4','q5','q6','q7',
+      'l2q1','l2q2','l2q3','l2q4','l2q5','l2q6','l2q7','l2q8','l2q9','l2q10',
+      'l2q11','l2q12','l2q13','l2q14','l2q15','l2q16','l2q17','l2q18','l2q19','l2q20'
     ];
     const sections = allSectionIds.map(id=>document.getElementById(id)).filter(Boolean);
 
