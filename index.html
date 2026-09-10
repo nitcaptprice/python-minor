@@ -301,6 +301,8 @@
         <option value="lab-0">Lab 0 · Environment Setup</option>
         <option value="lab-1">Lab 1 · Python Basics</option>
         <option value="lab-2">Lab 2 · Loops, Strings & Data Structures</option>
+        <option value="lab-3">Lab 3 · Functions, Modules & Exceptions</option>
+        <option value="lab-4">Lab 4 · File Handling & Pickle</option>
       </select>
     </div>
   </div>
@@ -343,6 +345,40 @@
       <a href="#l2q18">Q18</a>
       <a href="#l2q19">Q19</a>
       <a href="#l2q20">Q20</a>
+    </nav>
+    <nav class="pills" id="pillnav-lab-3" style="display:none;">
+      <a href="#l3q1">Q1</a>
+      <a href="#l3q2">Q2</a>
+      <a href="#l3q3">Q3</a>
+      <a href="#l3q4">Q4</a>
+      <a href="#l3q5">Q5</a>
+      <a href="#l3q6">Q6</a>
+      <a href="#l3q7">Q7</a>
+      <a href="#l3q8">Q8</a>
+      <a href="#l3q9">Q9</a>
+      <a href="#l3q10">Q10</a>
+      <a href="#l3q11">Q11</a>
+      <a href="#l3q12">Q12</a>
+      <a href="#l3q13">Q13</a>
+      <a href="#l3q14">Q14</a>
+      <a href="#l3q15">Q15</a>
+    </nav>
+    <nav class="pills" id="pillnav-lab-4" style="display:none;">
+      <a href="#l4q1">Q1</a>
+      <a href="#l4q2">Q2</a>
+      <a href="#l4q3">Q3</a>
+      <a href="#l4q4">Q4</a>
+      <a href="#l4q5">Q5</a>
+      <a href="#l4q6">Q6</a>
+      <a href="#l4q7">Q7</a>
+      <a href="#l4q8">Q8</a>
+      <a href="#l4q9">Q9</a>
+      <a href="#l4q10">Q10</a>
+      <a href="#l4q11">Q11</a>
+      <a href="#l4q12">Q12</a>
+      <a href="#l4q13">Q13</a>
+      <a href="#l4q14">Q14</a>
+      <a href="#l4q15">Q15</a>
     </nav>
   </div>
 </header>
@@ -1765,6 +1801,1482 @@ print("All good, NumPy", numpy.__version__)</div>
 </div>
 <!-- /LAB 2 -->
 
+<!-- ============================================================ -->
+<!-- LAB 3 — FUNCTIONS, MODULES & EXCEPTIONS                      -->
+<!-- ============================================================ -->
+<div class="lab-view" id="lab-3">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Python for AI/ML — Lab Session 3</div>
+        <h1>Functions, modules & exception handling</h1>
+        <p class="lead">Fifteen programs on writing reusable functions, scope, decorators, custom modules, the standard library, and handling errors gracefully — the scaffolding every larger project depends on.</p>
+        <div class="hero-meta">
+          <div><strong>15 questions</strong>In this lab</div>
+          <div><strong>Jupyter Notebook</strong>Run each in its own cell</div>
+          <div><strong>Topics</strong>Functions · scope · try/except</div>
+        </div>
+      </div>
+      <div class="nb-cell">
+        <div class="nb-cell-head"><span class="nb-in">In&nbsp;[1]:</span></div>
+        <div class="nb-cell-body">print("Lab 3 — Functions & Exceptions")</div>
+        <div class="nb-out">Lab 3 — Functions & Exceptions</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lab3-overview">
+    <div class="step-num">QUESTIONS AT A GLANCE</div>
+    <h2>Fifteen questions</h2>
+    <p class="section-lead">Click any card, or use the "Q1–Q15" pills above, to jump straight to that question's code.</p>
+    <div class="overview-grid q-grid">
+      <a class="overview-card" href="#l3q1"><div class="k">Q1</div><h4>Menu Calculator</h4><p>Functions per operation</p></a>
+      <a class="overview-card" href="#l3q2"><div class="k">Q2</div><h4>Marks & Grade</h4><p>Total, average, grade</p></a>
+      <a class="overview-card" href="#l3q3"><div class="k">Q3</div><h4>is_prime() Function</h4><p>Primes in a range</p></a>
+      <a class="overview-card" href="#l3q4"><div class="k">Q4</div><h4>List Statistics</h4><p>Min/max/sum/avg, no builtins</p></a>
+      <a class="overview-card" href="#l3q5"><div class="k">Q5</div><h4>calculate_bill()</h4><p>Positional, keyword, default args</p></a>
+      <a class="overview-card" href="#l3q6"><div class="k">Q6</div><h4>Scope Demo</h4><p>global vs local</p></a>
+      <a class="overview-card" href="#l3q7"><div class="k">Q7</div><h4>Decorator</h4><p>Wraps a factorial function</p></a>
+      <a class="overview-card" href="#l3q8"><div class="k">Q8</div><h4>Custom Module</h4><p>math_utils.py + menu</p></a>
+      <a class="overview-card" href="#l3q9"><div class="k">Q9</div><h4>math & random</h4><p>sqrt, power, floor, ceil</p></a>
+      <a class="overview-card" href="#l3q10"><div class="k">Q10</div><h4>os & sys</h4><p>cwd, listdir, version, argv</p></a>
+      <a class="overview-card" href="#l3q11"><div class="k">Q11</div><h4>Safe Division</h4><p>try/except for bad input</p></a>
+      <a class="overview-card" href="#l3q12"><div class="k">Q12</div><h4>List Index Access</h4><p>else / finally in practice</p></a>
+      <a class="overview-card" href="#l3q13"><div class="k">Q13</div><h4>register_student()</h4><p>raise ValueError</p></a>
+      <a class="overview-card" href="#l3q14"><div class="k">Q14</div><h4>assert Validation</h4><p>Average of marks</p></a>
+      <a class="overview-card" href="#l3q15"><div class="k">Q15</div><h4>Student Records</h4><p>Menu-driven, module + exceptions</p></a>
+    </div>
+  </section>
+
+  <section id="l3q1">
+    <div class="q-head"><span class="q-tag">Q1</span><h2 style="margin:0;">Menu-Driven Calculator</h2></div>
+    <div class="q-prompt">Write separate functions for addition, subtraction, multiplication, division and modulus. Create a menu-driven program that calls the appropriate function based on the user's choice. Prevent division or modulus by zero.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l3q1_menu_calculator.py</div>
+        <button class="copy-btn" data-copy="def add(a, b):\n    return a + b\n\ndef subtract(a, b):\n    return a - b\n\ndef multiply(a, b):\n    return a * b\n\ndef divide(a, b):\n    if b == 0:\n        return &quot;Error: Cannot divide by zero&quot;\n    return a / b\n\ndef modulus(a, b):\n    if b == 0:\n        return &quot;Error: Cannot perform modulus by zero&quot;\n    return a % b\n\nwhile True:\n    print(&quot;\\n1. Add  2. Subtract  3. Multiply  4. Divide  5. Modulus  6. Exit&quot;)\n    choice = input(&quot;Enter your choice: &quot;)\n\n    if choice == &quot;6&quot;:\n        print(&quot;Exiting...&quot;)\n        break\n\n    if choice in (&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;):\n        num1 = float(input(&quot;Enter first number: &quot;))\n        num2 = float(input(&quot;Enter second number: &quot;))\n\n        if choice == &quot;1&quot;:\n            print(&quot;Result:&quot;, add(num1, num2))\n        elif choice == &quot;2&quot;:\n            print(&quot;Result:&quot;, subtract(num1, num2))\n        elif choice == &quot;3&quot;:\n            print(&quot;Result:&quot;, multiply(num1, num2))\n        elif choice == &quot;4&quot;:\n            print(&quot;Result:&quot;, divide(num1, num2))\n        elif choice == &quot;5&quot;:\n            print(&quot;Result:&quot;, modulus(num1, num2))\n    else:\n        print(&quot;Invalid choice&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">def add(a, b):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return a + b</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">def subtract(a, b):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return a - b</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">def multiply(a, b):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return a * b</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">def divide(a, b):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if b == 0:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Error: Cannot divide by zero"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return a / b</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">def modulus(a, b):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if b == 0:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Error: Cannot perform modulus by zero"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return a % b</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">while True:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("\n1. Add  2. Subtract  3. Multiply  4. Divide  5. Modulus  6. Exit")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;choice = input("Enter your choice: ")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if choice == "6":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Exiting...")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if choice in ("1", "2", "3", "4", "5"):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num1 = float(input("Enter first number: "))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num2 = float(input("Enter second number: "))</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if choice == "1":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Result:", add(num1, num2))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif choice == "2":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Result:", subtract(num1, num2))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif choice == "3":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Result:", multiply(num1, num2))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif choice == "4":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Result:", divide(num1, num2))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif choice == "5":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Result:", modulus(num1, num2))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Invalid choice")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l3q1_menu_calculator.py</span></div>
+        <div class="line out">1. Add  2. Subtract  3. Multiply  4. Divide  5. Modulus  6. Exit</div>
+        <div class="line out">Enter your choice: 4</div>
+        <div class="line out">Enter first number: 10</div>
+        <div class="line out">Enter second number: 0</div>
+        <div class="line out">Result: Error: Cannot divide by zero</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">1. Add  2. Subtract  3. Multiply  4. Divide  5. Modulus  6. Exit</div>
+        <div class="line out">Enter your choice: 6</div>
+        <div class="line out">Exiting...</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q2">
+    <div class="q-head"><span class="q-tag">Q2</span><h2 style="margin:0;">Total, Average Marks and Grade</h2></div>
+    <div class="q-prompt">Create functions to compute total marks, average marks and grade for a student who has marks in five subjects. Validate that every mark lies between 0 and 100. Display a formatted result summary.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l3q2_marks_grade.py</div>
+        <button class="copy-btn" data-copy="def compute_total(marks):\n    return sum(marks)\n\ndef compute_average(marks):\n    return compute_total(marks) / len(marks)\n\ndef compute_grade(average):\n    if average >= 90:\n        return &quot;A&quot;\n    elif average >= 75:\n        return &quot;B&quot;\n    elif average >= 60:\n        return &quot;C&quot;\n    elif average >= 40:\n        return &quot;D&quot;\n    else:\n        return &quot;F&quot;\n\nmarks = []\nfor i in range(1, 6):\n    mark = float(input(f&quot;Enter marks for subject {i}: &quot;))\n    while mark < 0 or mark > 100:\n        print(&quot;Marks must be between 0 and 100&quot;)\n        mark = float(input(f&quot;Enter marks for subject {i}: &quot;))\n    marks.append(mark)\n\ntotal = compute_total(marks)\naverage = compute_average(marks)\ngrade = compute_grade(average)\n\nprint(&quot;\\n--- Result Summary ---&quot;)\nprint(f&quot;Total Marks   : {total}&quot;)\nprint(f&quot;Average Marks : {average:.2f}&quot;)\nprint(f&quot;Grade         : {grade}&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">def compute_total(marks):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return sum(marks)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">def compute_average(marks):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return compute_total(marks) / len(marks)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">def compute_grade(average):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if average >= 90:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "A"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;elif average >= 75:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "B"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;elif average >= 60:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "C"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;elif average >= 40:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "D"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "F"</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">marks = []</div>
+        <div class="line code">for i in range(1, 6):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;mark = float(input(f"Enter marks for subject {i}: "))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;while mark < 0 or mark > 100:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Marks must be between 0 and 100")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mark = float(input(f"Enter marks for subject {i}: "))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;marks.append(mark)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">total = compute_total(marks)</div>
+        <div class="line code">average = compute_average(marks)</div>
+        <div class="line code">grade = compute_grade(average)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("\n--- Result Summary ---")</div>
+        <div class="line code">print(f"Total Marks   : {total}")</div>
+        <div class="line code">print(f"Average Marks : {average:.2f}")</div>
+        <div class="line code">print(f"Grade         : {grade}")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l3q2_marks_grade.py</span></div>
+        <div class="line out">Enter marks for subject 1: 85</div>
+        <div class="line out">Enter marks for subject 2: 90</div>
+        <div class="line out">Enter marks for subject 3: 78</div>
+        <div class="line out">Enter marks for subject 4: 92</div>
+        <div class="line out">Enter marks for subject 5: 88</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">--- Result Summary ---</div>
+        <div class="line out">Total Marks   : 433.0</div>
+        <div class="line out">Average Marks : 86.60</div>
+        <div class="line out">Grade         : B</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q3">
+    <div class="q-head"><span class="q-tag">Q3</span><h2 style="margin:0;">is_prime() and Primes in a Range</h2></div>
+    <div class="q-prompt">Write a function <code class="inline">is_prime(n)</code> that returns True if n is prime and False otherwise. Use it to display all prime numbers in a user-specified range. Use <code class="inline">continue</code> where appropriate to skip unwanted values.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l3q3_is_prime.py</div>
+        <button class="copy-btn" data-copy="def is_prime(n):\n    if n < 2:\n        return False\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n\nstart = int(input(&quot;Enter start of range: &quot;))\nend = int(input(&quot;Enter end of range: &quot;))\n\nprint(f&quot;Prime numbers between {start} and {end}:&quot;)\nfor num in range(start, end + 1):\n    if not is_prime(num):\n        continue\n    print(num, end=&quot; &quot;)\nprint()">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">def is_prime(n):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if n < 2:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return False</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;for i in range(2, int(n ** 0.5) + 1):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if n % i == 0:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return False</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return True</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">start = int(input("Enter start of range: "))</div>
+        <div class="line code">end = int(input("Enter end of range: "))</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print(f"Prime numbers between {start} and {end}:")</div>
+        <div class="line code">for num in range(start, end + 1):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if not is_prime(num):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print(num, end=" ")</div>
+        <div class="line code">print()</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l3q3_is_prime.py</span></div>
+        <div class="line out">Enter start of range: 10</div>
+        <div class="line out">Enter end of range: 40</div>
+        <div class="line out">Prime numbers between 10 and 40:</div>
+        <div class="line out">11 13 17 19 23 29 31 37</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q4">
+    <div class="q-head"><span class="q-tag">Q4</span><h2 style="margin:0;">List Statistics (No min/max/sum)</h2></div>
+    <div class="q-prompt">Write a function that accepts a list of numbers and returns the minimum, maximum, sum and average. Do not use <code class="inline">min()</code>, <code class="inline">max()</code> or <code class="inline">sum()</code>. Demonstrate local variables and return multiple values.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l3q4_list_stats.py</div>
+        <button class="copy-btn" data-copy="def compute_stats(numbers):\n    minimum = numbers[0]\n    maximum = numbers[0]\n    total = 0\n    for num in numbers:\n        if num < minimum:\n            minimum = num\n        if num > maximum:\n            maximum = num\n        total += num\n    average = total / len(numbers)\n    return minimum, maximum, total, average\n\nvalues = [23, 45, 12, 67, 34, 89, 9]\nlow, high, total, avg = compute_stats(values)\n\nprint(&quot;Minimum :&quot;, low)\nprint(&quot;Maximum :&quot;, high)\nprint(&quot;Sum     :&quot;, total)\nprint(&quot;Average :&quot;, round(avg, 2))">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">def compute_stats(numbers):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;minimum = numbers[0]</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;maximum = numbers[0]</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;total = 0</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;for num in numbers:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if num < minimum:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minimum = num</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if num > maximum:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum = num</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total += num</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;average = total / len(numbers)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return minimum, maximum, total, average</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">values = [23, 45, 12, 67, 34, 89, 9]</div>
+        <div class="line code">low, high, total, avg = compute_stats(values)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Minimum :", low)</div>
+        <div class="line code">print("Maximum :", high)</div>
+        <div class="line code">print("Sum     :", total)</div>
+        <div class="line code">print("Average :", round(avg, 2))</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l3q4_list_stats.py</span></div>
+        <div class="line out">Minimum : 9</div>
+        <div class="line out">Maximum : 89</div>
+        <div class="line out">Sum     : 279</div>
+        <div class="line out">Average : 39.86</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q5">
+    <div class="q-head"><span class="q-tag">Q5</span><h2 style="margin:0;">calculate_bill() — Positional, Keyword & Default Args</h2></div>
+    <div class="q-prompt">Design a function <code class="inline">calculate_bill()</code> for an online purchase using positional, keyword and default arguments. Inputs may include item price, quantity, discount percentage and tax percentage. Display the final payable amount.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l3q5_calculate_bill.py</div>
+        <button class="copy-btn" data-copy="def calculate_bill(price, quantity, discount=0, tax=5):\n    subtotal = price * quantity\n    discount_amount = subtotal * (discount / 100)\n    taxable_amount = subtotal - discount_amount\n    tax_amount = taxable_amount * (tax / 100)\n    final_amount = taxable_amount + tax_amount\n    return final_amount\n\n# Positional arguments, defaults for discount &amp; tax\nbill1 = calculate_bill(500, 2)\nprint(&quot;Bill 1 (defaults)              :&quot;, bill1)\n\n# Keyword arguments\nbill2 = calculate_bill(price=500, quantity=2, discount=10)\nprint(&quot;Bill 2 (10% discount)          :&quot;, bill2)\n\n# All arguments specified\nbill3 = calculate_bill(price=1200, quantity=1, discount=15, tax=18)\nprint(&quot;Bill 3 (custom discount & tax) :&quot;, bill3)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">def calculate_bill(price, quantity, discount=0, tax=5):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;subtotal = price * quantity</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;discount_amount = subtotal * (discount / 100)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;taxable_amount = subtotal - discount_amount</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;tax_amount = taxable_amount * (tax / 100)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;final_amount = taxable_amount + tax_amount</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return final_amount</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line cmt"># Positional arguments, defaults for discount &amp; tax</div>
+        <div class="line code">bill1 = calculate_bill(500, 2)</div>
+        <div class="line code">print("Bill 1 (defaults)              :", bill1)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line cmt"># Keyword arguments</div>
+        <div class="line code">bill2 = calculate_bill(price=500, quantity=2, discount=10)</div>
+        <div class="line code">print("Bill 2 (10% discount)          :", bill2)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line cmt"># All arguments specified</div>
+        <div class="line code">bill3 = calculate_bill(price=1200, quantity=1, discount=15, tax=18)</div>
+        <div class="line code">print("Bill 3 (custom discount & tax) :", bill3)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l3q5_calculate_bill.py</span></div>
+        <div class="line out">Bill 1 (defaults)              : 1050.0</div>
+        <div class="line out">Bill 2 (10% discount)          : 945.0</div>
+        <div class="line out">Bill 3 (custom discount & tax) : 1203.6</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q6">
+    <div class="q-head"><span class="q-tag">Q6</span><h2 style="margin:0;">Global vs Local Scope</h2></div>
+    <div class="q-prompt">Create a program with a global variable representing a course name and local variables inside two functions. Demonstrate local and global scope clearly. Modify a global counter using the <code class="inline">global</code> keyword and show its value before and after function calls.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l3q6_scope_demo.py</div>
+        <button class="copy-btn" data-copy="course_name = &quot;Natural Language Processing&quot;\ncounter = 0\n\ndef show_course():\n    course_name = &quot;Local Override&quot;  # local variable, shadows the global one\n    print(&quot;Inside show_course (local):&quot;, course_name)\n\ndef increment_counter():\n    global counter\n    counter += 1\n    print(&quot;Inside increment_counter, counter is now:&quot;, counter)\n\nprint(&quot;Global course_name           :&quot;, course_name)\nshow_course()\nprint(&quot;Global course_name unchanged :&quot;, course_name)\n\nprint(&quot;\\nCounter before calls:&quot;, counter)\nincrement_counter()\nincrement_counter()\nprint(&quot;Counter after calls :&quot;, counter)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">course_name = "Natural Language Processing"</div>
+        <div class="line code">counter = 0</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">def show_course():</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;course_name = "Local Override"  <span class="cmt"># local variable, shadows the global one</span></div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Inside show_course (local):", course_name)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">def increment_counter():</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;global counter</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;counter += 1</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Inside increment_counter, counter is now:", counter)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Global course_name           :", course_name)</div>
+        <div class="line code">show_course()</div>
+        <div class="line code">print("Global course_name unchanged :", course_name)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("\nCounter before calls:", counter)</div>
+        <div class="line code">increment_counter()</div>
+        <div class="line code">increment_counter()</div>
+        <div class="line code">print("Counter after calls :", counter)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l3q6_scope_demo.py</span></div>
+        <div class="line out">Global course_name           : Natural Language Processing</div>
+        <div class="line out">Inside show_course (local): Local Override</div>
+        <div class="line out">Global course_name unchanged : Natural Language Processing</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">Counter before calls: 0</div>
+        <div class="line out">Inside increment_counter, counter is now: 1</div>
+        <div class="line out">Inside increment_counter, counter is now: 2</div>
+        <div class="line out">Counter after calls : 2</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q7">
+    <div class="q-head"><span class="q-tag">Q7</span><h2 style="margin:0;">A Simple Decorator</h2></div>
+    <div class="q-prompt">Create a simple decorator that prints "Function started" before a function executes and "Function completed" after it finishes. Apply the decorator to a function that calculates the factorial of a number.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l3q7_decorator.py</div>
+        <button class="copy-btn" data-copy="def track_execution(func):\n    def wrapper(*args, **kwargs):\n        print(&quot;Function started&quot;)\n        result = func(*args, **kwargs)\n        print(&quot;Function completed&quot;)\n        return result\n    return wrapper\n\n@track_execution\ndef factorial(n):\n    result = 1\n    for i in range(1, n + 1):\n        result *= i\n    return result\n\nvalue = factorial(5)\nprint(&quot;Factorial result:&quot;, value)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">def track_execution(func):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;def wrapper(*args, **kwargs):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Function started")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = func(*args, **kwargs)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Function completed")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return result</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return wrapper</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">@track_execution</div>
+        <div class="line code">def factorial(n):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;result = 1</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;for i in range(1, n + 1):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result *= i</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return result</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">value = factorial(5)</div>
+        <div class="line code">print("Factorial result:", value)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l3q7_decorator.py</span></div>
+        <div class="line out">Function started</div>
+        <div class="line out">Function completed</div>
+        <div class="line out">Factorial result: 120</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q8">
+    <div class="q-head"><span class="q-tag">Q8</span><h2 style="margin:0;">A Custom Module</h2></div>
+    <div class="q-prompt">Create a module named <code class="inline">math_utils.py</code> containing functions for factorial, prime checking and Fibonacci generation. Create a second Python file that imports the module and provides a menu to use these functions.</div>
+
+    <div class="code-title">math_utils.py</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">math_utils.py</div>
+        <button class="copy-btn" data-copy="def factorial(n):\n    result = 1\n    for i in range(1, n + 1):\n        result *= i\n    return result\n\ndef is_prime(n):\n    if n < 2:\n        return False\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n\ndef fibonacci(n):\n    a, b = 0, 1\n    series = []\n    for _ in range(n):\n        series.append(a)\n        a, b = b, a + b\n    return series">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">def factorial(n):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;result = 1</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;for i in range(1, n + 1):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result *= i</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return result</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">def is_prime(n):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if n < 2:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return False</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;for i in range(2, int(n ** 0.5) + 1):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if n % i == 0:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return False</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return True</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">def fibonacci(n):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;a, b = 0, 1</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;series = []</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;for _ in range(n):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;series.append(a)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a, b = b, a + b</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return series</div>
+      </div>
+    </div>
+
+    <div class="code-title">main.py</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">main.py</div>
+        <button class="copy-btn" data-copy="import math_utils\n\nwhile True:\n    print(&quot;\\n1. Factorial  2. Prime check  3. Fibonacci series  4. Exit&quot;)\n    choice = input(&quot;Enter your choice: &quot;)\n\n    if choice == &quot;1&quot;:\n        n = int(input(&quot;Enter a number: &quot;))\n        print(&quot;Factorial:&quot;, math_utils.factorial(n))\n    elif choice == &quot;2&quot;:\n        n = int(input(&quot;Enter a number: &quot;))\n        print(&quot;Is prime:&quot;, math_utils.is_prime(n))\n    elif choice == &quot;3&quot;:\n        n = int(input(&quot;Enter number of terms: &quot;))\n        print(&quot;Fibonacci series:&quot;, math_utils.fibonacci(n))\n    elif choice == &quot;4&quot;:\n        print(&quot;Exiting...&quot;)\n        break\n    else:\n        print(&quot;Invalid choice&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">import math_utils</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">while True:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("\n1. Factorial  2. Prime check  3. Fibonacci series  4. Exit")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;choice = input("Enter your choice: ")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if choice == "1":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n = int(input("Enter a number: "))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Factorial:", math_utils.factorial(n))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;elif choice == "2":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n = int(input("Enter a number: "))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Is prime:", math_utils.is_prime(n))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;elif choice == "3":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n = int(input("Enter number of terms: "))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Fibonacci series:", math_utils.fibonacci(n))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;elif choice == "4":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Exiting...")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Invalid choice")</div>
+      </div>
+    </div>
+    <div class="callout"><strong>Note —</strong> Both files must sit in the same folder (e.g. <code class="inline">~/aiml-lab</code>) so that <code class="inline">import math_utils</code> can find <code class="inline">math_utils.py</code>.</div>
+
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 main.py</span></div>
+        <div class="line out">1. Factorial  2. Prime check  3. Fibonacci series  4. Exit</div>
+        <div class="line out">Enter your choice: 1</div>
+        <div class="line out">Enter a number: 6</div>
+        <div class="line out">Factorial: 720</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">1. Factorial  2. Prime check  3. Fibonacci series  4. Exit</div>
+        <div class="line out">Enter your choice: 4</div>
+        <div class="line out">Exiting...</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q9">
+    <div class="q-head"><span class="q-tag">Q9</span><h2 style="margin:0;">The math and random Modules</h2></div>
+    <div class="q-prompt">Write a program that uses the <code class="inline">math</code> module to calculate square root, power, floor and ceiling values for user input. Then use the <code class="inline">random</code> module to generate five random integers and display their average.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l3q9_math_random.py</div>
+        <button class="copy-btn" data-copy="import math\nimport random\n\nnum = float(input(&quot;Enter a number: &quot;))\npower = float(input(&quot;Enter the power to raise it to: &quot;))\n\nprint(&quot;Square root :&quot;, math.sqrt(num))\nprint(&quot;Power       :&quot;, math.pow(num, power))\nprint(&quot;Floor       :&quot;, math.floor(num))\nprint(&quot;Ceiling     :&quot;, math.ceil(num))\n\nrandom_numbers = [random.randint(1, 100) for _ in range(5)]\naverage = sum(random_numbers) / len(random_numbers)\n\nprint(&quot;\\nRandom numbers:&quot;, random_numbers)\nprint(&quot;Average       :&quot;, average)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">import math</div>
+        <div class="line code">import random</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">num = float(input("Enter a number: "))</div>
+        <div class="line code">power = float(input("Enter the power to raise it to: "))</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Square root :", math.sqrt(num))</div>
+        <div class="line code">print("Power       :", math.pow(num, power))</div>
+        <div class="line code">print("Floor       :", math.floor(num))</div>
+        <div class="line code">print("Ceiling     :", math.ceil(num))</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">random_numbers = [random.randint(1, 100) for _ in range(5)]</div>
+        <div class="line code">average = sum(random_numbers) / len(random_numbers)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("\nRandom numbers:", random_numbers)</div>
+        <div class="line code">print("Average       :", average)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l3q9_math_random.py</span></div>
+        <div class="line out">Enter a number: 27</div>
+        <div class="line out">Enter the power to raise it to: 2</div>
+        <div class="line out">Square root : 5.196152422706632</div>
+        <div class="line out">Power       : 729.0</div>
+        <div class="line out">Floor       : 27</div>
+        <div class="line out">Ceiling     : 27</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">Random numbers: [45, 12, 78, 3, 99]</div>
+        <div class="line out">Average       : 47.4</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q10">
+    <div class="q-head"><span class="q-tag">Q10</span><h2 style="margin:0;">The os and sys Modules</h2></div>
+    <div class="q-prompt">Write a program that displays the current working directory, lists files/folders in the current directory using <code class="inline">os</code>, and prints the Python version and command-line arguments using <code class="inline">sys</code>. Also demonstrate <code class="inline">dir(os)</code> or <code class="inline">dir(sys)</code> and explain its purpose in a comment.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l3q10_os_sys.py</div>
+        <button class="copy-btn" data-copy="import os\nimport sys\n\nprint(&quot;Current working directory:&quot;, os.getcwd())\n\nprint(&quot;\\nFiles and folders here:&quot;)\nfor item in os.listdir():\n    print(&quot; -&quot;, item)\n\nprint(&quot;\\nPython version    :&quot;, sys.version)\nprint(&quot;Command-line args :&quot;, sys.argv)\n\n# dir(os) lists every attribute/function the os module provides —\n# handy for discovering things like os.mkdir or os.remove without\n# needing to open the documentation every time.\nprint(&quot;\\nFirst 10 names in dir(os):&quot;, dir(os)[:10])">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">import os</div>
+        <div class="line code">import sys</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Current working directory:", os.getcwd())</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("\nFiles and folders here:")</div>
+        <div class="line code">for item in os.listdir():</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print(" -", item)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("\nPython version    :", sys.version)</div>
+        <div class="line code">print("Command-line args :", sys.argv)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line cmt"># dir(os) lists every attribute/function the os module provides —</div>
+        <div class="line cmt"># handy for discovering things like os.mkdir or os.remove without</div>
+        <div class="line cmt"># needing to open the documentation every time.</div>
+        <div class="line code">print("\nFirst 10 names in dir(os):", dir(os)[:10])</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l3q10_os_sys.py</span></div>
+        <div class="line out">Current working directory: /home/student/aiml-lab</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">Files and folders here:</div>
+        <div class="line out"> - venv</div>
+        <div class="line out"> - hello-world.ipynb</div>
+        <div class="line out"> - requirements.txt</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">Python version    : 3.12.3 (main, Apr 9 2024, 08:09:14) [GCC 13.2.0]</div>
+        <div class="line out">Command-line args : ['l3q10_os_sys.py']</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">First 10 names in dir(os): ['DirEntry', 'F_OK', 'GenericAlias', 'Mapping', 'MutableMapping', 'O_APPEND', 'O_CREAT', 'O_EXCL', 'O_RDONLY', 'O_RDWR']</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q11">
+    <div class="q-head"><span class="q-tag">Q11</span><h2 style="margin:0;">Safe Division with try/except</h2></div>
+    <div class="q-prompt">Accept two numbers from the user and perform division. Use try-except to handle invalid numeric input and <code class="inline">ZeroDivisionError</code>. The program should display a user-friendly message instead of terminating abruptly.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l3q11_safe_division.py</div>
+        <button class="copy-btn" data-copy="try:\n    num1 = float(input(&quot;Enter numerator: &quot;))\n    num2 = float(input(&quot;Enter denominator: &quot;))\n    result = num1 / num2\n    print(&quot;Result:&quot;, result)\nexcept ValueError:\n    print(&quot;Error: Please enter valid numbers&quot;)\nexcept ZeroDivisionError:\n    print(&quot;Error: Cannot divide by zero&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">try:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;num1 = float(input("Enter numerator: "))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;num2 = float(input("Enter denominator: "))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;result = num1 / num2</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Result:", result)</div>
+        <div class="line code">except ValueError:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Error: Please enter valid numbers")</div>
+        <div class="line code">except ZeroDivisionError:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Error: Cannot divide by zero")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l3q11_safe_division.py</span></div>
+        <div class="line out">Enter numerator: 10</div>
+        <div class="line out">Enter denominator: 0</div>
+        <div class="line out">Error: Cannot divide by zero</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q12">
+    <div class="q-head"><span class="q-tag">Q12</span><h2 style="margin:0;">List Index Access with else / finally</h2></div>
+    <div class="q-prompt">Write a program that accepts an index and accesses an element from a predefined list. Handle <code class="inline">ValueError</code> and <code class="inline">IndexError</code> separately. Use <code class="inline">else</code> to print the selected element when no exception occurs and <code class="inline">finally</code> to print a completion message.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l3q12_index_access.py</div>
+        <button class="copy-btn" data-copy="numbers = [10, 20, 30, 40, 50]\n\ntry:\n    index = int(input(&quot;Enter an index (0-4): &quot;))\n    value = numbers[index]\nexcept ValueError:\n    print(&quot;Error: Please enter a valid integer index&quot;)\nexcept IndexError:\n    print(&quot;Error: Index is out of range&quot;)\nelse:\n    print(&quot;Selected element:&quot;, value)\nfinally:\n    print(&quot;Program execution completed&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">numbers = [10, 20, 30, 40, 50]</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">try:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;index = int(input("Enter an index (0-4): "))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;value = numbers[index]</div>
+        <div class="line code">except ValueError:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Error: Please enter a valid integer index")</div>
+        <div class="line code">except IndexError:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Error: Index is out of range")</div>
+        <div class="line code">else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Selected element:", value)</div>
+        <div class="line code">finally:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Program execution completed")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l3q12_index_access.py</span></div>
+        <div class="line out">Enter an index (0-4): 9</div>
+        <div class="line out">Error: Index is out of range</div>
+        <div class="line out">Program execution completed</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q13">
+    <div class="q-head"><span class="q-tag">Q13</span><h2 style="margin:0;">register_student() — raise ValueError</h2></div>
+    <div class="q-prompt">Write a function <code class="inline">register_student(age)</code> that accepts a student age. If age is less than 16 or greater than 60, raise a <code class="inline">ValueError</code> with a meaningful message. Catch the exception in the calling code and display the error.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l3q13_register_student.py</div>
+        <button class="copy-btn" data-copy="def register_student(age):\n    if age < 16 or age > 60:\n        raise ValueError(&quot;Age must be between 16 and 60 to register&quot;)\n    print(f&quot;Student registered successfully, age {age}&quot;)\n\ntry:\n    student_age = int(input(&quot;Enter student age: &quot;))\n    register_student(student_age)\nexcept ValueError as e:\n    print(&quot;Registration failed:&quot;, e)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">def register_student(age):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if age < 16 or age > 60:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError("Age must be between 16 and 60 to register")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print(f"Student registered successfully, age {age}")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">try:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;student_age = int(input("Enter student age: "))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;register_student(student_age)</div>
+        <div class="line code">except ValueError as e:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Registration failed:", e)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l3q13_register_student.py</span></div>
+        <div class="line out">Enter student age: 70</div>
+        <div class="line out">Registration failed: Age must be between 16 and 60 to register</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q14">
+    <div class="q-head"><span class="q-tag">Q14</span><h2 style="margin:0;">Average of Marks with assert</h2></div>
+    <div class="q-prompt">Write a program to calculate the average of a list of marks. Use <code class="inline">assert</code> statements to ensure that the list is not empty and that every mark is between 0 and 100. Test the program with both valid and invalid data.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l3q14_assert_marks.py</div>
+        <button class="copy-btn" data-copy="def average_marks(marks):\n    assert len(marks) > 0, &quot;Marks list cannot be empty&quot;\n    for mark in marks:\n        assert 0 <= mark <= 100, f&quot;Invalid mark: {mark}&quot;\n    return sum(marks) / len(marks)\n\nvalid_marks = [78, 85, 92, 60, 74]\nprint(&quot;Average of valid marks:&quot;, average_marks(valid_marks))\n\ninvalid_marks = [78, 105, 92]\ntry:\n    print(&quot;Average of invalid marks:&quot;, average_marks(invalid_marks))\nexcept AssertionError as e:\n    print(&quot;Assertion failed:&quot;, e)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">def average_marks(marks):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;assert len(marks) > 0, "Marks list cannot be empty"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;for mark in marks:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assert 0 <= mark <= 100, f"Invalid mark: {mark}"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return sum(marks) / len(marks)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">valid_marks = [78, 85, 92, 60, 74]</div>
+        <div class="line code">print("Average of valid marks:", average_marks(valid_marks))</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">invalid_marks = [78, 105, 92]</div>
+        <div class="line code">try:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Average of invalid marks:", average_marks(invalid_marks))</div>
+        <div class="line code">except AssertionError as e:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Assertion failed:", e)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l3q14_assert_marks.py</span></div>
+        <div class="line out">Average of valid marks: 77.8</div>
+        <div class="line out">Assertion failed: Invalid mark: 105</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l3q15">
+    <div class="q-head"><span class="q-tag">Q15</span><h2 style="margin:0;">Menu-Driven Student Record Program</h2></div>
+    <div class="q-prompt">Build a small menu-driven student record program using functions. Store records in a list of dictionaries. Provide options to add a student, search by roll number, display all records and calculate average marks. Organize helper functions in a separate module. Use exception handling for invalid marks, invalid menu choices and missing records. Use <code class="inline">raise</code> or <code class="inline">assert</code> for at least one validation rule.</div>
+
+    <div class="code-title">student_utils.py</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">student_utils.py</div>
+        <button class="copy-btn" data-copy="def add_student(records, roll_no, name, marks):\n    for record in records:\n        if record[&quot;roll_no&quot;] == roll_no:\n            raise ValueError(f&quot;Roll number {roll_no} already exists&quot;)\n    assert 0 <= marks <= 100, &quot;Marks must be between 0 and 100&quot;\n    records.append({&quot;roll_no&quot;: roll_no, &quot;name&quot;: name, &quot;marks&quot;: marks})\n\ndef search_student(records, roll_no):\n    for record in records:\n        if record[&quot;roll_no&quot;] == roll_no:\n            return record\n    raise LookupError(f&quot;No student found with roll number {roll_no}&quot;)\n\ndef average_marks(records):\n    if not records:\n        return 0\n    total = sum(r[&quot;marks&quot;] for r in records)\n    return total / len(records)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">def add_student(records, roll_no, name, marks):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;for record in records:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if record["roll_no"] == roll_no:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(f"Roll number {roll_no} already exists")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;assert 0 <= marks <= 100, "Marks must be between 0 and 100"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;records.append({"roll_no": roll_no, "name": name, "marks": marks})</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">def search_student(records, roll_no):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;for record in records:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if record["roll_no"] == roll_no:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return record</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;raise LookupError(f"No student found with roll number {roll_no}")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">def average_marks(records):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if not records:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;total = sum(r["marks"] for r in records)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;return total / len(records)</div>
+      </div>
+    </div>
+
+    <div class="code-title">main.py</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">main.py</div>
+        <button class="copy-btn" data-copy="import student_utils\n\nrecords = []\n\nwhile True:\n    print(&quot;\\n1. Add student  2. Search by roll number  3. Display all  4. Average marks  5. Exit&quot;)\n    choice = input(&quot;Enter your choice: &quot;)\n\n    try:\n        if choice == &quot;1&quot;:\n            roll_no = input(&quot;Enter roll number: &quot;)\n            name = input(&quot;Enter name: &quot;)\n            marks = float(input(&quot;Enter marks: &quot;))\n            student_utils.add_student(records, roll_no, name, marks)\n            print(&quot;Student added successfully&quot;)\n\n        elif choice == &quot;2&quot;:\n            roll_no = input(&quot;Enter roll number to search: &quot;)\n            record = student_utils.search_student(records, roll_no)\n            print(&quot;Found:&quot;, record)\n\n        elif choice == &quot;3&quot;:\n            if not records:\n                print(&quot;No records yet&quot;)\n            for r in records:\n                print(r)\n\n        elif choice == &quot;4&quot;:\n            print(&quot;Class average:&quot;, student_utils.average_marks(records))\n\n        elif choice == &quot;5&quot;:\n            print(&quot;Exiting...&quot;)\n            break\n\n        else:\n            print(&quot;Invalid choice&quot;)\n\n    except (ValueError, AssertionError, LookupError) as e:\n        print(&quot;Error:&quot;, e)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">import student_utils</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">records = []</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">while True:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("\n1. Add student  2. Search by roll number  3. Display all  4. Average marks  5. Exit")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;choice = input("Enter your choice: ")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;try:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if choice == "1":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;roll_no = input("Enter roll number: ")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name = input("Enter name: ")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;marks = float(input("Enter marks: "))</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;student_utils.add_student(records, roll_no, name, marks)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Student added successfully")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif choice == "2":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;roll_no = input("Enter roll number to search: ")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;record = student_utils.search_student(records, roll_no)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Found:", record)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif choice == "3":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if not records:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("No records yet")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for r in records:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(r)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif choice == "4":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Class average:", student_utils.average_marks(records))</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif choice == "5":</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Exiting...")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Invalid choice")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;except (ValueError, AssertionError, LookupError) as e:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Error:", e)</div>
+      </div>
+    </div>
+
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 main.py</span></div>
+        <div class="line out">1. Add student  2. Search by roll number  3. Display all  4. Average marks  5. Exit</div>
+        <div class="line out">Enter your choice: 1</div>
+        <div class="line out">Enter roll number: CS01</div>
+        <div class="line out">Enter name: Zoram</div>
+        <div class="line out">Enter marks: 88</div>
+        <div class="line out">Student added successfully</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">1. Add student  2. Search by roll number  3. Display all  4. Average marks  5. Exit</div>
+        <div class="line out">Enter your choice: 2</div>
+        <div class="line out">Enter roll number to search: CS01</div>
+        <div class="line out">Found: {'roll_no': 'CS01', 'name': 'Zoram', 'marks': 88.0}</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">1. Add student  2. Search by roll number  3. Display all  4. Average marks  5. Exit</div>
+        <div class="line out">Enter your choice: 5</div>
+        <div class="line out">Exiting...</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- /LAB 3 -->
+
+<!-- ============================================================ -->
+<!-- LAB 4 — FILE HANDLING & PICKLE                                -->
+<!-- ============================================================ -->
+<div class="lab-view" id="lab-4">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Python for AI/ML — Lab Session 4</div>
+        <h1>File handling, directories & pickle</h1>
+        <p class="lead">Fifteen programs on reading and writing text files, searching and replacing content, working with directories via <code class="inline">os</code>, and serializing Python objects with <code class="inline">pickle</code> — the everyday mechanics of loading and saving a dataset.</p>
+        <div class="hero-meta">
+          <div><strong>15 questions</strong>In this lab</div>
+          <div><strong>Jupyter Notebook</strong>Run each in its own cell</div>
+          <div><strong>Topics</strong>Files · os · pickle</div>
+        </div>
+      </div>
+      <div class="nb-cell">
+        <div class="nb-cell-head"><span class="nb-in">In&nbsp;[1]:</span></div>
+        <div class="nb-cell-body">print("Lab 4 — File Handling & Pickle")</div>
+        <div class="nb-out">Lab 4 — File Handling & Pickle</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lab4-overview">
+    <div class="step-num">QUESTIONS AT A GLANCE</div>
+    <h2>Fifteen questions</h2>
+    <p class="section-lead">Click any card, or use the "Q1–Q15" pills above, to jump straight to that question's code.</p>
+    <div class="overview-grid q-grid">
+      <a class="overview-card" href="#l4q1"><div class="k">Q1</div><h4>Create & Write</h4><p>student.txt from user input</p></a>
+      <a class="overview-card" href="#l4q2"><div class="k">Q2</div><h4>Read Entire File</h4><p>read() the whole contents</p></a>
+      <a class="overview-card" href="#l4q3"><div class="k">Q3</div><h4>Read Line by Line</h4><p>With line numbers</p></a>
+      <a class="overview-card" href="#l4q4"><div class="k">Q4</div><h4>Lines, Words, Chars</h4><p>Count all three</p></a>
+      <a class="overview-card" href="#l4q5"><div class="k">Q5</div><h4>Append Data</h4><p>Add a record, keep old ones</p></a>
+      <a class="overview-card" href="#l4q6"><div class="k">Q6</div><h4>Copy a File</h4><p>source.txt → destination.txt</p></a>
+      <a class="overview-card" href="#l4q7"><div class="k">Q7</div><h4>Search for a Word</h4><p>Case-insensitive count</p></a>
+      <a class="overview-card" href="#l4q8"><div class="k">Q8</div><h4>Replace a Word</h4><p>Save to a new file</p></a>
+      <a class="overview-card" href="#l4q9"><div class="k">Q9</div><h4>Process marks.txt</h4><p>Average, highest, lowest</p></a>
+      <a class="overview-card" href="#l4q10"><div class="k">Q10</div><h4>tell() and seek()</h4><p>File pointer navigation</p></a>
+      <a class="overview-card" href="#l4q11"><div class="k">Q11</div><h4>List Directory</h4><p>Files & folders via os</p></a>
+      <a class="overview-card" href="#l4q12"><div class="k">Q12</div><h4>mkdir / rename / rmdir</h4><p>Directory lifecycle</p></a>
+      <a class="overview-card" href="#l4q13"><div class="k">Q13</div><h4>Filter by Extension</h4><p>.txt / .csv scanning</p></a>
+      <a class="overview-card" href="#l4q14"><div class="k">Q14</div><h4>Pickle Serialize</h4><p>Save & load a dict</p></a>
+      <a class="overview-card" href="#l4q15"><div class="k">Q15</div><h4>Sensor Data Processor</h4><p>Averages + report.txt</p></a>
+    </div>
+  </section>
+
+  <section id="l4q1">
+    <div class="q-head"><span class="q-tag">Q1</span><h2 style="margin:0;">Create and Write to a Text File</h2></div>
+    <div class="q-prompt">Write a Python program to create a text file named <code class="inline">student.txt</code> and write the following details entered by the user: name, roll number, department and semester. After writing, display a confirmation message.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q1_write_file.py</div>
+        <button class="copy-btn" data-copy="name = input(&quot;Enter name: &quot;)\nroll_number = input(&quot;Enter roll number: &quot;)\ndepartment = input(&quot;Enter department: &quot;)\nsemester = input(&quot;Enter semester: &quot;)\n\nwith open(&quot;student.txt&quot;, &quot;w&quot;) as f:\n    f.write(f&quot;Name: {name}\\n&quot;)\n    f.write(f&quot;Roll Number: {roll_number}\\n&quot;)\n    f.write(f&quot;Department: {department}\\n&quot;)\n    f.write(f&quot;Semester: {semester}\\n&quot;)\n\nprint(&quot;student.txt created and saved successfully&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">name = input("Enter name: ")</div>
+        <div class="line code">roll_number = input("Enter roll number: ")</div>
+        <div class="line code">department = input("Enter department: ")</div>
+        <div class="line code">semester = input("Enter semester: ")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">with open("student.txt", "w") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;f.write(f"Name: {name}\n")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;f.write(f"Roll Number: {roll_number}\n")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;f.write(f"Department: {department}\n")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;f.write(f"Semester: {semester}\n")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("student.txt created and saved successfully")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q1_write_file.py</span></div>
+        <div class="line out">Enter name: Lalrinliana</div>
+        <div class="line out">Enter roll number: CS2023045</div>
+        <div class="line out">Enter department: Computer Science</div>
+        <div class="line out">Enter semester: 5</div>
+        <div class="line out">student.txt created and saved successfully</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q2">
+    <div class="q-head"><span class="q-tag">Q2</span><h2 style="margin:0;">Read the Entire Contents of a File</h2></div>
+    <div class="q-prompt">Write a Python program to open <code class="inline">student.txt</code> and display its complete contents on the screen using an appropriate file-reading method.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q2_read_file.py</div>
+        <button class="copy-btn" data-copy="with open(&quot;student.txt&quot;, &quot;r&quot;) as f:\n    contents = f.read()\n\nprint(&quot;--- student.txt contents ---&quot;)\nprint(contents)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">with open("student.txt", "r") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;contents = f.read()</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("--- student.txt contents ---")</div>
+        <div class="line code">print(contents)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q2_read_file.py</span></div>
+        <div class="line out">--- student.txt contents ---</div>
+        <div class="line out">Name: Lalrinliana</div>
+        <div class="line out">Roll Number: CS2023045</div>
+        <div class="line out">Department: Computer Science</div>
+        <div class="line out">Semester: 5</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q3">
+    <div class="q-head"><span class="q-tag">Q3</span><h2 style="margin:0;">Read a File Line by Line</h2></div>
+    <div class="q-prompt">Create a file containing at least five lines of text. Write a Python program to read and display the file one line at a time. Also display the line number before each line.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q3_read_lines.py</div>
+        <button class="copy-btn" data-copy="with open(&quot;notes.txt&quot;, &quot;r&quot;) as f:\n    for line_number, line in enumerate(f, start=1):\n        print(f&quot;{line_number}: {line.strip()}&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">with open("notes.txt", "r") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;for line_number, line in enumerate(f, start=1):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"{line_number}: {line.strip()}")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q3_read_lines.py</span></div>
+        <div class="line out">1: Mizo is a low-resource language.</div>
+        <div class="line out">2: NLP models need annotated corpora.</div>
+        <div class="line out">3: Tokenization is the first preprocessing step.</div>
+        <div class="line out">4: Word embeddings capture semantic meaning.</div>
+        <div class="line out">5: Evaluation metrics include BLEU and F1 score.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q4">
+    <div class="q-head"><span class="q-tag">Q4</span><h2 style="margin:0;">Count Lines, Words and Characters</h2></div>
+    <div class="q-prompt">Write a Python program that reads a text file and reports the total number of lines, words and characters present in the file.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q4_count_stats.py</div>
+        <button class="copy-btn" data-copy="with open(&quot;student.txt&quot;, &quot;r&quot;) as f:\n    contents = f.read()\n\nlines = contents.splitlines()\nwords = contents.split()\n\nprint(&quot;Lines     :&quot;, len(lines))\nprint(&quot;Words     :&quot;, len(words))\nprint(&quot;Characters:&quot;, len(contents))">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">with open("student.txt", "r") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;contents = f.read()</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">lines = contents.splitlines()</div>
+        <div class="line code">words = contents.split()</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Lines     :", len(lines))</div>
+        <div class="line code">print("Words     :", len(words))</div>
+        <div class="line code">print("Characters:", len(contents))</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q4_count_stats.py</span></div>
+        <div class="line out">Lines     : 4</div>
+        <div class="line out">Words     : 10</div>
+        <div class="line out">Characters: 87</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q5">
+    <div class="q-head"><span class="q-tag">Q5</span><h2 style="margin:0;">Append Data to an Existing File</h2></div>
+    <div class="q-prompt">Write a Python program to append a new student record to an existing file without deleting the previously stored records. Then display the updated file contents.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q5_append_file.py</div>
+        <button class="copy-btn" data-copy="new_record = &quot;\\nName: Zorammawii\\nRoll Number: CS2023046\\nDepartment: Computer Science\\nSemester: 5\\n&quot;\n\nwith open(&quot;student.txt&quot;, &quot;a&quot;) as f:\n    f.write(new_record)\n\nprint(&quot;Record appended successfully\\n&quot;)\n\nwith open(&quot;student.txt&quot;, &quot;r&quot;) as f:\n    print(&quot;--- Updated student.txt ---&quot;)\n    print(f.read())">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">new_record = "\nName: Zorammawii\nRoll Number: CS2023046\nDepartment: Computer Science\nSemester: 5\n"</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">with open("student.txt", "a") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;f.write(new_record)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Record appended successfully\n")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">with open("student.txt", "r") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("--- Updated student.txt ---")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print(f.read())</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q5_append_file.py</span></div>
+        <div class="line out">Record appended successfully</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">--- Updated student.txt ---</div>
+        <div class="line out">Name: Lalrinliana</div>
+        <div class="line out">Roll Number: CS2023045</div>
+        <div class="line out">Department: Computer Science</div>
+        <div class="line out">Semester: 5</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">Name: Zorammawii</div>
+        <div class="line out">Roll Number: CS2023046</div>
+        <div class="line out">Department: Computer Science</div>
+        <div class="line out">Semester: 5</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q6">
+    <div class="q-head"><span class="q-tag">Q6</span><h2 style="margin:0;">Copy Contents from One File to Another</h2></div>
+    <div class="q-prompt">Write a Python program to copy all contents of <code class="inline">source.txt</code> into <code class="inline">destination.txt</code>. After copying, verify the operation by displaying the contents of <code class="inline">destination.txt</code>.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q6_copy_file.py</div>
+        <button class="copy-btn" data-copy="with open(&quot;source.txt&quot;, &quot;r&quot;) as src:\n    contents = src.read()\n\nwith open(&quot;destination.txt&quot;, &quot;w&quot;) as dest:\n    dest.write(contents)\n\nprint(&quot;File copied successfully\\n&quot;)\n\nwith open(&quot;destination.txt&quot;, &quot;r&quot;) as f:\n    print(&quot;--- destination.txt contents ---&quot;)\n    print(f.read())">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">with open("source.txt", "r") as src:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;contents = src.read()</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">with open("destination.txt", "w") as dest:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;dest.write(contents)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("File copied successfully\n")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">with open("destination.txt", "r") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("--- destination.txt contents ---")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print(f.read())</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q6_copy_file.py</span></div>
+        <div class="line out">File copied successfully</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">--- destination.txt contents ---</div>
+        <div class="line out">Mizo is a low-resource language spoken mainly in Mizoram.</div>
+        <div class="line out">NLP resources for it remain limited.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q7">
+    <div class="q-head"><span class="q-tag">Q7</span><h2 style="margin:0;">Search for a Word in a File</h2></div>
+    <div class="q-prompt">Write a Python program that accepts a word from the user and searches for it in a text file. Display the number of times the word occurs. The search should be case-insensitive.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q7_search_word.py</div>
+        <button class="copy-btn" data-copy="word = input(&quot;Enter a word to search: &quot;)\n\nwith open(&quot;student.txt&quot;, &quot;r&quot;) as f:\n    contents = f.read()\n\ncount = contents.lower().split().count(word.lower())\nprint(f&quot;'{word}' occurs {count} times&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">word = input("Enter a word to search: ")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">with open("student.txt", "r") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;contents = f.read()</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">count = contents.lower().split().count(word.lower())</div>
+        <div class="line code">print(f"'{word}' occurs {count} times")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q7_search_word.py</span></div>
+        <div class="line out">Enter a word to search: Science</div>
+        <div class="line out">'Science' occurs 2 times</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q8">
+    <div class="q-head"><span class="q-tag">Q8</span><h2 style="margin:0;">Replace a Word in a Text File</h2></div>
+    <div class="q-prompt">Write a program to read a text file, replace every occurrence of a user-specified word with another word, and save the modified contents into a new file.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q8_replace_word.py</div>
+        <button class="copy-btn" data-copy="old_word = input(&quot;Enter the word to replace: &quot;)\nnew_word = input(&quot;Enter the replacement word: &quot;)\n\nwith open(&quot;student.txt&quot;, &quot;r&quot;) as f:\n    contents = f.read()\n\nupdated_contents = contents.replace(old_word, new_word)\n\nwith open(&quot;student_updated.txt&quot;, &quot;w&quot;) as f:\n    f.write(updated_contents)\n\nprint(f&quot;Replaced all occurrences of '{old_word}' with '{new_word}'&quot;)\nprint(&quot;Saved to student_updated.txt&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">old_word = input("Enter the word to replace: ")</div>
+        <div class="line code">new_word = input("Enter the replacement word: ")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">with open("student.txt", "r") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;contents = f.read()</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">updated_contents = contents.replace(old_word, new_word)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">with open("student_updated.txt", "w") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;f.write(updated_contents)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print(f"Replaced all occurrences of '{old_word}' with '{new_word}'")</div>
+        <div class="line code">print("Saved to student_updated.txt")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q8_replace_word.py</span></div>
+        <div class="line out">Enter the word to replace: Science</div>
+        <div class="line out">Enter the replacement word: Engineering</div>
+        <div class="line out">Replaced all occurrences of 'Science' with 'Engineering'</div>
+        <div class="line out">Saved to student_updated.txt</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q9">
+    <div class="q-head"><span class="q-tag">Q9</span><h2 style="margin:0;">Process a Marks File</h2></div>
+    <div class="q-prompt">Create a file <code class="inline">marks.txt</code> containing student names and marks in the format <code class="inline">Name,Mark</code>. Write a program to read the file and display: each student's name and mark, the class average, the highest mark, and the lowest mark.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q9_process_marks.py</div>
+        <button class="copy-btn" data-copy="with open(&quot;marks.txt&quot;, &quot;r&quot;) as f:\n    lines = f.readlines()\n\nnames = []\nmarks = []\n\nfor line in lines:\n    name, mark = line.strip().split(&quot;,&quot;)\n    names.append(name)\n    marks.append(float(mark))\n\nprint(&quot;--- Student Marks ---&quot;)\nfor name, mark in zip(names, marks):\n    print(f&quot;{name}: {mark}&quot;)\n\naverage = sum(marks) / len(marks)\nhighest = max(marks)\nlowest = min(marks)\n\nprint(f&quot;\\nClass average : {average:.2f}&quot;)\nprint(f&quot;Highest mark  : {highest}&quot;)\nprint(f&quot;Lowest mark   : {lowest}&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">with open("marks.txt", "r") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;lines = f.readlines()</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">names = []</div>
+        <div class="line code">marks = []</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">for line in lines:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;name, mark = line.strip().split(",")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;names.append(name)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;marks.append(float(mark))</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("--- Student Marks ---")</div>
+        <div class="line code">for name, mark in zip(names, marks):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print(f"{name}: {mark}")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">average = sum(marks) / len(marks)</div>
+        <div class="line code">highest = max(marks)</div>
+        <div class="line code">lowest = min(marks)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print(f"\nClass average : {average:.2f}")</div>
+        <div class="line code">print(f"Highest mark  : {highest}")</div>
+        <div class="line code">print(f"Lowest mark   : {lowest}")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q9_process_marks.py</span></div>
+        <div class="line out">--- Student Marks ---</div>
+        <div class="line out">Lalrinliana: 85.0</div>
+        <div class="line out">Zorammawii: 92.0</div>
+        <div class="line out">David: 67.0</div>
+        <div class="line out">Mary: 78.0</div>
+        <div class="line out">John: 55.0</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">Class average : 75.40</div>
+        <div class="line out">Highest mark  : 92.0</div>
+        <div class="line out">Lowest mark   : 55.0</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q10">
+    <div class="q-head"><span class="q-tag">Q10</span><h2 style="margin:0;">Using tell() and seek()</h2></div>
+    <div class="q-prompt">Write a program to demonstrate the use of <code class="inline">tell()</code> and <code class="inline">seek()</code>. Read a few characters from a file, display the current file-pointer position, move the pointer to another position using <code class="inline">seek()</code>, and read again.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q10_tell_seek.py</div>
+        <button class="copy-btn" data-copy="with open(&quot;student.txt&quot;, &quot;r&quot;) as f:\n    first_chunk = f.read(10)\n    print(&quot;First 10 characters:&quot;, first_chunk)\n    print(&quot;Current pointer position:&quot;, f.tell())\n\n    f.seek(0)\n    print(&quot;\\nPointer moved back to start (seek(0))&quot;)\n\n    next_chunk = f.read(15)\n    print(&quot;Next 15 characters:&quot;, next_chunk)\n    print(&quot;Current pointer position:&quot;, f.tell())">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">with open("student.txt", "r") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;first_chunk = f.read(10)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("First 10 characters:", first_chunk)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Current pointer position:", f.tell())</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;f.seek(0)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("\nPointer moved back to start (seek(0))")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;next_chunk = f.read(15)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Next 15 characters:", next_chunk)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Current pointer position:", f.tell())</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q10_tell_seek.py</span></div>
+        <div class="line out">First 10 characters: Name: Lalr</div>
+        <div class="line out">Current pointer position: 10</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">Pointer moved back to start (seek(0))</div>
+        <div class="line out">Next 15 characters: Name: Lalrinlia</div>
+        <div class="line out">Current pointer position: 15</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q11">
+    <div class="q-head"><span class="q-tag">Q11</span><h2 style="margin:0;">List Files and Folders in a Directory</h2></div>
+    <div class="q-prompt">Write a program using the <code class="inline">os</code> module to display all files and subdirectories present in the current working directory. Also display the current working directory path.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q11_list_directory.py</div>
+        <button class="copy-btn" data-copy="import os\n\nprint(&quot;Current working directory:&quot;, os.getcwd())\n\nprint(&quot;\\nFiles and folders here:&quot;)\nfor item in os.listdir():\n    print(&quot; -&quot;, item)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">import os</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Current working directory:", os.getcwd())</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("\nFiles and folders here:")</div>
+        <div class="line code">for item in os.listdir():</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print(" -", item)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q11_list_directory.py</span></div>
+        <div class="line out">Current working directory: /home/student/aiml-lab</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">Files and folders here:</div>
+        <div class="line out"> - venv</div>
+        <div class="line out"> - student.txt</div>
+        <div class="line out"> - marks.txt</div>
+        <div class="line out"> - source.txt</div>
+        <div class="line out"> - destination.txt</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q12">
+    <div class="q-head"><span class="q-tag">Q12</span><h2 style="margin:0;">Create, Rename and Remove a Directory</h2></div>
+    <div class="q-prompt">Write a program that creates a directory named <code class="inline">AI_ML_Lab</code>, renames it to <code class="inline">Python_Lab</code>, and removes the directory after confirming that it is empty. Handle possible errors gracefully.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q12_directory_lifecycle.py</div>
+        <button class="copy-btn" data-copy="import os\n\ntry:\n    os.mkdir(&quot;AI_ML_Lab&quot;)\n    print(&quot;Directory 'AI_ML_Lab' created&quot;)\n\n    os.rename(&quot;AI_ML_Lab&quot;, &quot;Python_Lab&quot;)\n    print(&quot;Renamed to 'Python_Lab'&quot;)\n\n    if not os.listdir(&quot;Python_Lab&quot;):\n        os.rmdir(&quot;Python_Lab&quot;)\n        print(&quot;'Python_Lab' removed (was empty)&quot;)\n    else:\n        print(&quot;Directory is not empty, skipping removal&quot;)\n\nexcept FileExistsError:\n    print(&quot;Error: A directory with that name already exists&quot;)\nexcept FileNotFoundError:\n    print(&quot;Error: Directory not found&quot;)\nexcept OSError as e:\n    print(&quot;Error:&quot;, e)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">import os</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">try:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;os.mkdir("AI_ML_Lab")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Directory 'AI_ML_Lab' created")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;os.rename("AI_ML_Lab", "Python_Lab")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Renamed to 'Python_Lab'")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if not os.listdir("Python_Lab"):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;os.rmdir("Python_Lab")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("'Python_Lab' removed (was empty)")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;else:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Directory is not empty, skipping removal")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">except FileExistsError:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Error: A directory with that name already exists")</div>
+        <div class="line code">except FileNotFoundError:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Error: Directory not found")</div>
+        <div class="line code">except OSError as e:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;print("Error:", e)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q12_directory_lifecycle.py</span></div>
+        <div class="line out">Directory 'AI_ML_Lab' created</div>
+        <div class="line out">Renamed to 'Python_Lab'</div>
+        <div class="line out">'Python_Lab' removed (was empty)</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q13">
+    <div class="q-head"><span class="q-tag">Q13</span><h2 style="margin:0;">Filter Files by Extension</h2></div>
+    <div class="q-prompt">Write a program to scan a given directory and display only files having a specified extension, such as .txt or .csv. The extension should be entered by the user.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q13_filter_extension.py</div>
+        <button class="copy-btn" data-copy="import os\n\nfolder = input(&quot;Enter directory path (or . for current): &quot;)\nextension = input(&quot;Enter file extension to filter (e.g. .txt): &quot;)\n\nprint(f&quot;\\n{extension} files in '{folder}':&quot;)\nfor item in os.listdir(folder):\n    if item.endswith(extension):\n        print(&quot; -&quot;, item)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">import os</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">folder = input("Enter directory path (or . for current): ")</div>
+        <div class="line code">extension = input("Enter file extension to filter (e.g. .txt): ")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print(f"\n{extension} files in '{folder}':")</div>
+        <div class="line code">for item in os.listdir(folder):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if item.endswith(extension):</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(" -", item)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q13_filter_extension.py</span></div>
+        <div class="line out">Enter directory path (or . for current): .</div>
+        <div class="line out">Enter file extension to filter (e.g. .txt): .txt</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">.txt files in '.':</div>
+        <div class="line out"> - student.txt</div>
+        <div class="line out"> - marks.txt</div>
+        <div class="line out"> - source.txt</div>
+        <div class="line out"> - destination.txt</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q14">
+    <div class="q-head"><span class="q-tag">Q14</span><h2 style="margin:0;">Store and Retrieve Python Objects using Pickle</h2></div>
+    <div class="q-prompt">Create a dictionary containing a student's name, roll number, marks list and average. Serialize the dictionary into a binary file using <code class="inline">pickle</code>. Then deserialize it and display the recovered object.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q14_pickle_demo.py</div>
+        <button class="copy-btn" data-copy="import pickle\n\nstudent = {\n    &quot;name&quot;: &quot;Lalrinliana&quot;,\n    &quot;roll_number&quot;: &quot;CS2023045&quot;,\n    &quot;marks&quot;: [85, 90, 78, 92, 88],\n    &quot;average&quot;: 86.6\n}\n\nwith open(&quot;student.pkl&quot;, &quot;wb&quot;) as f:\n    pickle.dump(student, f)\n\nprint(&quot;Student object serialized to student.pkl&quot;)\n\nwith open(&quot;student.pkl&quot;, &quot;rb&quot;) as f:\n    recovered = pickle.load(f)\n\nprint(&quot;\\nRecovered object:&quot;)\nprint(recovered)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">import pickle</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">student = {</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;"name": "Lalrinliana",</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;"roll_number": "CS2023045",</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;"marks": [85, 90, 78, 92, 88],</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;"average": 86.6</div>
+        <div class="line code">}</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">with open("student.pkl", "wb") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;pickle.dump(student, f)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("Student object serialized to student.pkl")</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">with open("student.pkl", "rb") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;recovered = pickle.load(f)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print("\nRecovered object:")</div>
+        <div class="line code">print(recovered)</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q14_pickle_demo.py</span></div>
+        <div class="line out">Student object serialized to student.pkl</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">Recovered object:</div>
+        <div class="line out">{'name': 'Lalrinliana', 'roll_number': 'CS2023045', 'marks': [85, 90, 78, 92, 88], 'average': 86.6}</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="l4q15">
+    <div class="q-head"><span class="q-tag">Q15</span><h2 style="margin:0;">Mini Dataset File Processor</h2></div>
+    <div class="q-prompt">Create a CSV-like text file containing sensor data in the format <code class="inline">timestamp, temperature, heart_rate</code>. Write a program to read all records, calculate the average temperature and average heart rate, identify the record with the highest heart rate, and save the summary into <code class="inline">report.txt</code>.</div>
+    <div class="terminal" style="margin-bottom:16px;">
+      <div class="terminal-bar">
+        <div class="terminal-dots"><span></span><span></span><span></span></div>
+        <div class="terminal-title">l4q15_sensor_processor.py</div>
+        <button class="copy-btn" data-copy="with open(&quot;sensor_data.txt&quot;, &quot;r&quot;) as f:\n    lines = f.readlines()\n\nrecords = []\nfor line in lines[1:]:  # skip the header row\n    timestamp, temperature, heart_rate = line.strip().split(&quot;,&quot;)\n    records.append({\n        &quot;timestamp&quot;: timestamp,\n        &quot;temperature&quot;: float(temperature),\n        &quot;heart_rate&quot;: float(heart_rate)\n    })\n\navg_temp = sum(r[&quot;temperature&quot;] for r in records) / len(records)\navg_hr = sum(r[&quot;heart_rate&quot;] for r in records) / len(records)\n\nhighest_hr_record = records[0]\nfor r in records:\n    if r[&quot;heart_rate&quot;] > highest_hr_record[&quot;heart_rate&quot;]:\n        highest_hr_record = r\n\nsummary = (\n    f&quot;Average Temperature : {avg_temp:.2f}\\n&quot;\n    f&quot;Average Heart Rate   : {avg_hr:.2f}\\n&quot;\n    f&quot;Highest Heart Rate   : {highest_hr_record['heart_rate']} at {highest_hr_record['timestamp']}\\n&quot;\n)\n\nwith open(&quot;report.txt&quot;, &quot;w&quot;) as f:\n    f.write(summary)\n\nprint(summary)\nprint(&quot;Summary saved to report.txt&quot;)">Copy</button>
+      </div>
+      <div class="terminal-body">
+        <div class="line code">with open("sensor_data.txt", "r") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;lines = f.readlines()</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">records = []</div>
+        <div class="line code">for line in lines[1:]:  <span class="cmt"># skip the header row</span></div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;timestamp, temperature, heart_rate = line.strip().split(",")</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;records.append({</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"timestamp": timestamp,</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"temperature": float(temperature),</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"heart_rate": float(heart_rate)</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;})</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">avg_temp = sum(r["temperature"] for r in records) / len(records)</div>
+        <div class="line code">avg_hr = sum(r["heart_rate"] for r in records) / len(records)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">highest_hr_record = records[0]</div>
+        <div class="line code">for r in records:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;if r["heart_rate"] > highest_hr_record["heart_rate"]:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;highest_hr_record = r</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">summary = (</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;f"Average Temperature : {avg_temp:.2f}\n"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;f"Average Heart Rate   : {avg_hr:.2f}\n"</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;f"Highest Heart Rate   : {highest_hr_record['heart_rate']} at {highest_hr_record['timestamp']}\n"</div>
+        <div class="line code">)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">with open("report.txt", "w") as f:</div>
+        <div class="line code">&nbsp;&nbsp;&nbsp;&nbsp;f.write(summary)</div>
+        <div class="line code">&nbsp;</div>
+        <div class="line code">print(summary)</div>
+        <div class="line code">print("Summary saved to report.txt")</div>
+      </div>
+    </div>
+    <div class="code-title">Sample run</div>
+    <div class="terminal">
+      <div class="terminal-bar"><div class="terminal-dots"><span></span><span></span><span></span></div><div class="terminal-title">output</div></div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">$ </span><span class="cmd">python3 l4q15_sensor_processor.py</span></div>
+        <div class="line out">Average Temperature : 36.90</div>
+        <div class="line out">Average Heart Rate   : 82.60</div>
+        <div class="line out">Highest Heart Rate   : 95.0 at 09:30</div>
+        <div class="line out">&nbsp;</div>
+        <div class="line out">Summary saved to report.txt</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- /LAB 4 -->
+
 </main>
 
 <footer>
@@ -1860,7 +3372,9 @@ print("All good, NumPy", numpy.__version__)</div>
   const pillNavs = {
     'lab-0': document.getElementById('pillnav-lab-0'),
     'lab-1': document.getElementById('pillnav-lab-1'),
-    'lab-2': document.getElementById('pillnav-lab-2')
+    'lab-2': document.getElementById('pillnav-lab-2'),
+    'lab-3': document.getElementById('pillnav-lab-3'),
+    'lab-4': document.getElementById('pillnav-lab-4')
   };
 
   function showLab(labId, scrollTop){
@@ -1880,12 +3394,20 @@ print("All good, NumPy", numpy.__version__)</div>
     const hash = window.location.hash.replace('#','');
     const lab1Ids = ['q1','q2','q3','q4','q5','q6','q7','lab1-overview'];
     const lab2Ids = ['lab2-overview','l2q1','l2q2','l2q3','l2q4','l2q5','l2q6','l2q7','l2q8','l2q9','l2q10','l2q11','l2q12','l2q13','l2q14','l2q15','l2q16','l2q17','l2q18','l2q19','l2q20'];
+    const lab3Ids = ['lab3-overview','l3q1','l3q2','l3q3','l3q4','l3q5','l3q6','l3q7','l3q8','l3q9','l3q10','l3q11','l3q12','l3q13','l3q14','l3q15'];
+    const lab4Ids = ['lab4-overview','l4q1','l4q2','l4q3','l4q4','l4q5','l4q6','l4q7','l4q8','l4q9','l4q10','l4q11','l4q12','l4q13','l4q14','l4q15'];
     if(lab1Ids.includes(hash)){
       labSelect.value = 'lab-1';
       showLab('lab-1', false);
     } else if(lab2Ids.includes(hash)){
       labSelect.value = 'lab-2';
       showLab('lab-2', false);
+    } else if(lab3Ids.includes(hash)){
+      labSelect.value = 'lab-3';
+      showLab('lab-3', false);
+    } else if(lab4Ids.includes(hash)){
+      labSelect.value = 'lab-4';
+      showLab('lab-4', false);
     }
   })();
 
@@ -1895,7 +3417,11 @@ print("All good, NumPy", numpy.__version__)</div>
       'python','jupyter','environment','packages','verify','troubleshooting',
       'q1','q2','q3','q4','q5','q6','q7',
       'l2q1','l2q2','l2q3','l2q4','l2q5','l2q6','l2q7','l2q8','l2q9','l2q10',
-      'l2q11','l2q12','l2q13','l2q14','l2q15','l2q16','l2q17','l2q18','l2q19','l2q20'
+      'l2q11','l2q12','l2q13','l2q14','l2q15','l2q16','l2q17','l2q18','l2q19','l2q20',
+      'l3q1','l3q2','l3q3','l3q4','l3q5','l3q6','l3q7','l3q8','l3q9','l3q10',
+      'l3q11','l3q12','l3q13','l3q14','l3q15',
+      'l4q1','l4q2','l4q3','l4q4','l4q5','l4q6','l4q7','l4q8','l4q9','l4q10',
+      'l4q11','l4q12','l4q13','l4q14','l4q15'
     ];
     const sections = allSectionIds.map(id=>document.getElementById(id)).filter(Boolean);
 
